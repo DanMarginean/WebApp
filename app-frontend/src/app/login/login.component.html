@@ -1,0 +1,21 @@
+<div>
+  <h1>Sign In</h1>
+
+
+  <form [formGroup]="logInForm" >
+  <div>Usename:</div>
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email">
+  </mat-form-field>
+  <div>Password:</div>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" formControlName="password">
+  </mat-form-field>
+    <div><button mat-flat-button (click)="logIn()" >Sign In</button></div>
+  </form>
+
+  <div><a href="#">Forgot password</a></div>
+  <p>Don't have an account?</p>
+  <button mat-flat-button routerLink="/register">Sign up here</button>
+</div>
+<!--types of users : anonim, user, admin-->
