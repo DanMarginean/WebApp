@@ -1,30 +1,51 @@
 package com.example.backendapp.controllers;
 
+import com.example.backendapp.DTOs.ItemAddDTO;
+import com.example.backendapp.DTOs.ItemCardDTO;
+import com.example.backendapp.DTOs.ItemFilterDTO;
 import com.example.backendapp.entities.Item;
+import com.example.backendapp.services.ImageService;
+import com.example.backendapp.services.ItemFilterService;
 import com.example.backendapp.services.ItemService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("http://localhost:4200")
 public class ItemController {
     private final ItemService itemService;
 
-    public ItemController(ItemService itemService){
-        this.itemService=itemService;
+
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
+
     }
 
-@GetMapping()
-    public List<Item> getAllItems(){return itemService.getAllItems();}
+    @GetMapping()
+    public List<Item> getAll() {
+        return itemService.getAllItems();
+    }
 
-@GetMapping("/items/{id}")
-public Item getItemById(@PathVariable UUID id){return itemService.getItemById(id); }
+    @GetMapping("/items/{id}")
+    public Item getItemById(@PathVariable UUID id) {
+        return itemService.getItemById(id);
+    }
 
-@PostMapping("/items")
-    public Item createItem(@RequestBody Item item){
-        return itemService.saveItem(item);
+    @GetMapping("/cards")
+    public List<ItemCardDTO> getAllItemCards() throws IOException {
+        return itemService.getAllItemCards();
+    }
+//    @RequestMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping("/items")
+    public Item createItem(@RequestPart("item") ItemAddDTO item,@RequestPart("image") MultipartFile file) throws IOException {
+
+        return itemService.saveItem(item,file);
     }
 
 
@@ -32,9 +53,24 @@ public Item getItemById(@PathVariable UUID id){return itemService.getItemById(id
     public void deleteAllItems() {
         itemService.deleteAllItems();
     }
-@DeleteMapping("/delete/{id}")
-public void deleteItemById(@PathVariable UUID id){itemService.deleteItemById(id);}
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteItemById(@PathVariable UUID id) {
+        itemService.deleteItemById(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public void updateItemById(@PathVariable UUID id ,@RequestBody ItemAddDTO item){
+         this.itemService.updateItem(id,item);
+    }
+
+    @PostMapping("/search")
+    public List<ItemCardDTO> getAllBySpecs(@RequestBody ItemFilterDTO itemFilterDTO){
+        return itemService.findItemsBySpecs(itemFilterDTO);
+    }
 }
+
+
 
 
 
