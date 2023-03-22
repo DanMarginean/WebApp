@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Observable} from 'rxjs';
+import {map, shareReplay} from 'rxjs/operators';
 import {AddDialogComponent} from "../add-dialog/add-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {NgbCarousel} from "@ng-bootstrap/ng-bootstrap";
@@ -17,14 +17,14 @@ import {CommunicationService} from "../communication.service";
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit{
-  isExpanded:boolean=true;
+export class MainComponent implements OnInit {
+  isExpanded: boolean = true;
   showNavigationArrows = false;
   showNavigationIndicators = false;
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
   // itemCards:ItemCard[]=[];
-  isPressed:boolean=false;
-  itemCards:ItemCard[]=[];
+  isPressed: boolean = false;
+  itemCards: ItemCard[] = [];
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -34,58 +34,57 @@ export class MainComponent implements OnInit{
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private auth:AuthService,
-              private route:Router,
-              private itemCardService:ItemCardService,
-              private dialog:MatDialog,
-              private refresh:CommunicationService,
-              private items:ItemcardComponent,
-              private carousel:NgbCarousel,) {}
-
-  ngOnInit() {if(this.auth.isTokenExpired()){
-    this.logOut()
+              private auth: AuthService,
+              private route: Router,
+              private itemCardService: ItemCardService,
+              private dialog: MatDialog,
+              private refresh: CommunicationService,
+              private items: ItemcardComponent,
+              private carousel: NgbCarousel,) {
   }
+
+  ngOnInit() {
+    if (this.auth.isTokenExpired()) {
+      this.logOut()
+    }
     // this.itemCardService.getAllItemCards();
   }
 
-  logOut(){
+  logOut() {
     this.auth.logOut();
   }
-  logIn(){
+
+  logIn() {
     this.route.navigateByUrl("/login");
   }
-  isLoggedIn():Boolean{
-    // console.log(this.auth.isLoggedIn());
+
+  isLoggedIn(): Boolean {
     return this.auth.isLoggedIn();
 
   }
-  isLoggedOut():Boolean{
-    // console.log(this.auth.isLoggedOut());
+
+  isLoggedOut(): Boolean {
+
     return this.auth.isLoggedOut();
   }
-//home
-  extendState():void{
-    this.isExpanded=!this.isExpanded;
+
+  extendState(): void {
+    this.isExpanded = !this.isExpanded;
 
   }
-  isAdmin():Boolean{
-    if(this.auth.getRole()==="ADMIN") return true;
+
+  isAdmin(): Boolean {
+    if (this.auth.getRole() === "ADMIN") return true;
     else return false
   }
-  openAddDialog(){
+
+  openAddDialog() {
     this.dialog.open(AddDialogComponent);
-    this.dialog.afterAllClosed.subscribe((next)=>this.items.getAllItems())
+    this.dialog.afterAllClosed.subscribe((next) => this.items.getAllItems())
   }
-  showItems(){
+
+  showItems() {
     this.route.navigateByUrl("home");
   }
 
-  // getAllItems():void{
-  //   this.itemCardService.getAllItemCards().subscribe(itemCards =>{
-  //     console.log(itemCards)
-  //     this.itemCards=itemCards
-  //
-  //   });
-  //     this.isPressed=!this.isPressed;
-  // }
 }

@@ -1,50 +1,27 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
 
-      [mode]="'push'"
-      [opened]="false">
+               [mode]="'push'"
+               [opened]="false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-<!--      <a mat-list-item href="#">Link 1</a>-->
-<!--      <a mat-list-item href="#">Link 2</a>-->
-<!--      <a mat-list-item href="#">Link 3</a>-->
 
       <div class="menu-container" *ngIf="drawer.opened">
-<!--        <mat-toolbar class="menu-toolbar">-->
-<!--          <button mat-flat-button class="menu-item" [matMenuTriggerFor]="freshwater" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">Freshwater Aquariums</button>-->
-<!--          <mat-menu #freshwater="matMenu" xPosition="after" yPosition="below" >-->
-<!--    <span (mouseleave)="menuTrigger.closeMenu()">-->
-<!--    <button mat-menu-item  routerLink="items" >Pesti</button>-->
-<!--    <button mat-menu-item>Acvarii</button>-->
-<!--      </span>-->
-<!--          </mat-menu>-->
-<!--          <button mat-flat-button class="menu-item" [matMenuTriggerFor]="salted">Marine Aquarium</button>-->
-<!--          <mat-menu #salted="matMenu">-->
-<!--            <button mat-menu-item >Pesti</button>-->
-<!--            <button mat-menu-item>Acvarii</button>-->
-<!--          </mat-menu>-->
-<!--          <button mat-flat-button class="menu-item" [matMenuTriggerFor]="pond">Ponds</button>-->
-<!--          <mat-menu #pond="matMenu">-->
-<!--            <button mat-menu-item >Pesti</button>-->
-<!--            <button mat-menu-item >Iazuri</button>-->
-<!--          </mat-menu>-->
 
-<!--        <mat-card>-->
+        <button mat-menu-item [matMenuTriggerFor]="freshwater" #menuFreshwaterTrigger="matMenuTrigger"
+                (mouseover)="menuFreshwaterTrigger.openMenu()">Freshwater
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="saltwater" #menuSaltwaterTrigger="matMenuTrigger"
+                (mouseover)="menuSaltwaterTrigger.openMenu()">Salted Water
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="ponds" #menuPondsTrigger="matMenuTrigger"
+                (mouseover)="menuPondsTrigger.openMenu()">Ponds
+        </button>
 
-<!--          <button mat-button [matMenuTriggerFor]="mainMenu"#menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">Menu</button>-->
 
-          <!--First level Menu-->
+        <!--Second level sub Menu-->
 
-<!--          <mat-menu #mainMenu="matMenu" >-->
-            <button mat-menu-item [matMenuTriggerFor]="freshwater" #menuFreshwaterTrigger="matMenuTrigger" (mouseover)="menuFreshwaterTrigger.openMenu()">Freshwater</button>
-            <button mat-menu-item [matMenuTriggerFor]="saltwater" #menuSaltwaterTrigger="matMenuTrigger" (mouseover)="menuSaltwaterTrigger.openMenu()">Salted Water</button>
-            <button mat-menu-item [matMenuTriggerFor]="ponds" #menuPondsTrigger="matMenuTrigger" (mouseover)="menuPondsTrigger.openMenu()">Ponds</button>
-
-<!--          </mat-menu>-->
-
-          <!--Second level sub Menu-->
-
-          <mat-menu #freshwater="matMenu">
+        <mat-menu #freshwater="matMenu">
             <span (mouseleave)="menuFreshwaterTrigger.closeMenu()">
             <button mat-menu-item [matMenuTriggerFor]="fishesFreshwater" routerLink="items">Aquarium Fish</button>
             <button mat-menu-item [matMenuTriggerFor]="filtersFreshwater">Filters</button>
@@ -55,9 +32,9 @@
             <button mat-menu-item [matMenuTriggerFor]="lightsFreshwater">Lights</button>
             <button mat-menu-item [matMenuTriggerFor]="decorationsFreshwater">Decorations</button>
             </span>
-          </mat-menu>
+        </mat-menu>
 
-          <mat-menu #saltwater="matMenu">
+        <mat-menu #saltwater="matMenu">
             <span (mouseleave)="menuSaltwaterTrigger.closeMenu()">
             <button mat-menu-item [matMenuTriggerFor]="fishesSaltwater">Aquarium Fish</button>
             <button mat-menu-item [matMenuTriggerFor]="filtersSaltwater">Filters</button>
@@ -69,9 +46,9 @@
             <button mat-menu-item [matMenuTriggerFor]="saltSaltwater">Salt</button>
             <button mat-menu-item [matMenuTriggerFor]="decorationsSaltwater">Decorations</button>
             </span>
-          </mat-menu>
+        </mat-menu>
 
-          <mat-menu #ponds="matMenu">
+        <mat-menu #ponds="matMenu">
             <span (mouseleave)="menuPondsTrigger.closeMenu()">
             <button mat-menu-item [matMenuTriggerFor]="fishesPonds">Aquarium Fish</button>
             <button mat-menu-item [matMenuTriggerFor]="filtersPonds">Filters</button>
@@ -80,159 +57,158 @@
             <button mat-menu-item [matMenuTriggerFor]="plantsPonds">Plants</button>
             <button mat-menu-item [matMenuTriggerFor]="decorationsPonds">Decorations</button>
             </span>
-          </mat-menu>
+        </mat-menu>
 
-          <!--Third level sub Menu-->
+        <!--Third level sub Menu-->
 
-          <mat-menu #fishesFreshwater="matMenu">
-            <span (mouseleave)="menuTrigger.closeMenu()">
-            </span>
-          </mat-menu>
-          <mat-menu #filtersFreshwater="matMenu">
-            <span (mouseleave)="menuTrigger.closeMenu()">
-            </span>
-          </mat-menu>
-          <mat-menu #accesoriesFreshwater="matMenu">
-            <span (mouseleave)="menuTrigger.closeMenu()">
-            </span>
-          </mat-menu>
-          <mat-menu #foodFreshwater="matMenu">
-            <span (mouseleave)="menuTrigger.closeMenu()">
-            </span>
-          </mat-menu>
-          <mat-menu #plantsFreshwater="matMenu">
-            <span (mouseleave)="menuTrigger.closeMenu()">
-            </span>
-          </mat-menu>
-          <mat-menu #aquariumsFreshwater="matMenu">
-            <span (mouseleave)="menuTrigger.closeMenu()">
-            </span>
-          </mat-menu>
-          <mat-menu #lightsFreshwater="matMenu">
+        <mat-menu #fishesFreshwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
         </mat-menu>
-          <mat-menu #decorationsFreshwater="matMenu">
+        <mat-menu #filtersFreshwater="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+            </span>
+        </mat-menu>
+        <mat-menu #accesoriesFreshwater="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+            </span>
+        </mat-menu>
+        <mat-menu #foodFreshwater="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+            </span>
+        </mat-menu>
+        <mat-menu #plantsFreshwater="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+            </span>
+        </mat-menu>
+        <mat-menu #aquariumsFreshwater="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+            </span>
+        </mat-menu>
+        <mat-menu #lightsFreshwater="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+            </span>
+        </mat-menu>
+        <mat-menu #decorationsFreshwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
         </mat-menu>
 
-<!--          //saltWater-->
-          <mat-menu #fishesSaltwater="matMenu">
+        <!--          //saltWater-->
+        <mat-menu #fishesSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #filtersSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #filtersSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #accesoriesSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #accesoriesSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #foodSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #foodSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #plantsSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #plantsSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #aquariumsSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #aquariumsSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #lightsSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #lightsSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #saltSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #saltSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #decorationsSaltwater="matMenu">
+        </mat-menu>
+        <mat-menu #decorationsSaltwater="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
+        </mat-menu>
 
-<!--          //Ponds-->
-          <mat-menu #fishesPonds="matMenu">
+        <!--          //Ponds-->
+        <mat-menu #fishesPonds="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #filtersPonds="matMenu">
+        </mat-menu>
+        <mat-menu #filtersPonds="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #accesoriesPonds="matMenu">
+        </mat-menu>
+        <mat-menu #accesoriesPonds="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #foodPonds="matMenu">
+        </mat-menu>
+        <mat-menu #foodPonds="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #plantsPonds="matMenu">
+        </mat-menu>
+        <mat-menu #plantsPonds="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
-          <mat-menu #decorationsPonds="matMenu">
+        </mat-menu>
+        <mat-menu #decorationsPonds="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             </span>
-          </mat-menu>
+        </mat-menu>
 
-<!--        </mat-card>-->
 
-         <div> <button mat-flat-button class="menu-item">Forum</button></div>
-         <div> <button mat-flat-button class="menu-item">About Us</button></div>
-<!--        </mat-toolbar>-->
+        <div>
+          <button mat-flat-button class="menu-item">Forum</button>
+        </div>
+        <div>
+          <button mat-flat-button class="menu-item">About Us</button>
+        </div>
+
       </div>
       <mat-divider></mat-divider>
       <div *ngIf="isAdmin()">
-        <div>  <button mat-flat-button  (click)="openAddDialog()" >Add</button></div>
-        <div> <button mat-flat-button >Delete</button></div>
-        <div>  <button mat-flat-button >Update</button></div>
+        <div>
+          <button mat-flat-button (click)="openAddDialog()">Add</button>
+        </div>
+        <div>
+          <button mat-flat-button>Delete</button>
+        </div>
+        <div>
+          <button mat-flat-button>Update</button>
+        </div>
       </div>
 
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-<!--      <button-->
-<!--        type="button"-->
-<!--        aria-label="Toggle sidenav"-->
-<!--        mat-icon-button-->
-<!--        (click)="drawer.toggle()"-->
-<!--        *ngIf="true">-->
-<!--        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>-->
-<!--      </button>-->
-<!--      <span>app-frontend</span>-->
 
-        <button mat-icon-button class="example-icon" >
-          <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+      <button mat-icon-button class="example-icon">
+        <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+      </button>
+      <span>My App</span>
+      <div class="rightHeader">
+        <button mat-icon-button>
+          <mat-icon>favorite</mat-icon>
         </button>
-        <span>My App</span>
-        <div class="rightHeader">
-          <button mat-icon-button>
-            <mat-icon>favorite</mat-icon>
-          </button>
-          <button class="account"mat-icon-button [mat-menu-trigger-for]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
-            <mat-icon>account_circle</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
+        <button class="account" mat-icon-button [mat-menu-trigger-for]="menu" #menuTrigger="matMenuTrigger"
+                (mouseover)="menuTrigger.openMenu()">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
             <span (mouseleave)="menuTrigger.closeMenu()">
             <button mat-menu-item *ngIf="isLoggedIn()">Profile</button>
             <button mat-menu-item *ngIf="isLoggedOut()" (click)="logIn()">Login</button>
             <button mat-menu-item *ngIf="isLoggedIn()" (click)="logOut()">Logout</button>
             </span>
-          </mat-menu>
-          <button mat-icon-button routerLink="/cart">
-            <mat-icon>shopping_cart</mat-icon>
-          </button>
-        </div>
+        </mat-menu>
+        <button mat-icon-button routerLink="/cart">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+      </div>
     </mat-toolbar>
-    <!-- Add Content Here -->
-<!--<app-itemcard></app-itemcard>-->
     <router-outlet></router-outlet>
 
   </mat-sidenav-content>

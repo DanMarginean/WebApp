@@ -4,23 +4,23 @@
 
 export const environment = {
   production: false,
-  apiURL:"http://localhost:8081/api/",
-  apiEndpoints:{
-    itemcard:"cards",
-    addProduct:"items",
-    deleteCard:"delete/",
-    updateCard:"update/"
+  apiURL: "http://localhost:8081/api/",
+  apiEndpoints: {
+    itemcard: "cards",
+    addProduct: "items",
+    deleteCard: "delete/",
+    updateCard: "update/"
   },
-  apiURLauth:"http://localhost:8081/api/v1/auth/",
-  apiEndpointsauth:{
-    register:"register",
-    auth:"authenticate"
+  apiURLauth: "http://localhost:8081/api/v1/auth/",
+  apiEndpointsauth: {
+    register: "register",
+    auth: "authenticate"
   },
-  apiUrlNft:"http://localhost:8081/api/v1/",
-  apiNftEndpoints:{
-    nft:"getAll",
-    deletenft:"delete/",
-    updatenft:"update/"
+  apiUrlNft: "http://localhost:8081/api/v1/",
+  apiNftEndpoints: {
+    nft: "getAll",
+    deletenft: "delete/",
+    updatenft: "update/"
 
   }
 };
