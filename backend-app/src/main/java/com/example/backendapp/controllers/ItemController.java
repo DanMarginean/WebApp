@@ -4,10 +4,7 @@ import com.example.backendapp.DTOs.ItemAddDTO;
 import com.example.backendapp.DTOs.ItemCardDTO;
 import com.example.backendapp.DTOs.ItemFilterDTO;
 import com.example.backendapp.entities.Item;
-import com.example.backendapp.services.ImageService;
-import com.example.backendapp.services.ItemFilterService;
 import com.example.backendapp.services.ItemService;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,11 +38,11 @@ public class ItemController {
     public List<ItemCardDTO> getAllItemCards() throws IOException {
         return itemService.getAllItemCards();
     }
-//    @RequestMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    @PostMapping("/items")
-    public Item createItem(@RequestPart("item") ItemAddDTO item,@RequestPart("image") MultipartFile file) throws IOException {
 
-        return itemService.saveItem(item,file);
+    @PostMapping("/items")
+    public Item createItem(@RequestPart("item") ItemAddDTO item, @RequestPart("image") MultipartFile file) throws IOException {
+
+        return itemService.saveItem(item, file);
     }
 
 
@@ -60,12 +57,12 @@ public class ItemController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateItemById(@PathVariable UUID id ,@RequestBody ItemAddDTO item){
-         this.itemService.updateItem(id,item);
+    public void updateItemById(@PathVariable UUID id, @RequestBody ItemAddDTO item) {
+        this.itemService.updateItem(id, item);
     }
 
     @PostMapping("/search")
-    public List<ItemCardDTO> getAllBySpecs(@RequestBody ItemFilterDTO itemFilterDTO){
+    public List<ItemCardDTO> getAllBySpecs(@RequestBody ItemFilterDTO itemFilterDTO) {
         return itemService.findItemsBySpecs(itemFilterDTO);
     }
 }

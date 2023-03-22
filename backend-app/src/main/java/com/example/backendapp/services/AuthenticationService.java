@@ -1,12 +1,12 @@
 package com.example.backendapp.services;
 
 
-import com.example.backendapp.Security.ConfirmationToken;
-import com.example.backendapp.Security.Role;
-import com.example.backendapp.Security.User;
 import com.example.backendapp.DTOs.AuthenticationRequest;
 import com.example.backendapp.DTOs.AuthenticationResponse;
 import com.example.backendapp.DTOs.RegisterRequest;
+import com.example.backendapp.Security.ConfirmationToken;
+import com.example.backendapp.Security.Role;
+import com.example.backendapp.Security.User;
 import com.example.backendapp.repositories.EmailSender;
 import com.example.backendapp.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @AllArgsConstructor
 
@@ -37,7 +36,6 @@ public class AuthenticationService {
     private final EmailSender emailSender;
 
 
-
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .firstname(request.getFirstname())
@@ -48,54 +46,29 @@ public class AuthenticationService {
                 .build();
         boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
 
-        if(userExists){
+        if (userExists) {
             throw new IllegalStateException("account already exist");
-//          Optional<Boolean> existentUser =userRepository.existsUserByEnabledTrue();
-//            if(existentUser.equals(true))
-//            {System.out.println("account exist");
-//                throw new IllegalStateException("account already exist");
-//
-//            }
-//            else{var jwtToken = jwtService.generateToken(user);
-//                  ConfirmationToken confirmationToken = new ConfirmationToken(
-//                          jwtToken,
-//                          LocalDateTime.now(),
-//                          LocalDateTime.now().plusDays(2),
-//                          user
-//                  );
-//
-//                  confirmationTokenService.saveConfirmationToken(
-//                          confirmationToken);
-//                  String link = "http://localhost:8081/api/v1/auth/confirm?token=" + jwtToken;
-//                  emailSender.send(
-//                          request.getEmail(),
-//                          buildEmail(request.getFirstname(), link));
-////                throw new IllegalStateException("You need to confirm yout email");
-//
-//                  return AuthenticationResponse.builder()
-//                          .token(jwtToken)
-//                          .build() ;
-//            }
-        }
-        else {
-            userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        ConfirmationToken confirmationToken = new ConfirmationToken(
-                jwtToken,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(2),
-                user
-        );
 
-        confirmationTokenService.saveConfirmationToken(
-                confirmationToken);
-        String link = "http://localhost:8081/api/v1/auth/confirm?token=" + jwtToken;
-        emailSender.send(
-                request.getEmail(),
-                buildEmail(request.getFirstname(), link));
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();}
+        } else {
+            userRepository.save(user);
+            var jwtToken = jwtService.generateToken(user);
+            ConfirmationToken confirmationToken = new ConfirmationToken(
+                    jwtToken,
+                    LocalDateTime.now(),
+                    LocalDateTime.now().plusDays(2),
+                    user
+            );
+
+            confirmationTokenService.saveConfirmationToken(
+                    confirmationToken);
+            String link = "http://localhost:8081/api/v1/auth/confirm?token=" + jwtToken;
+            emailSender.send(
+                    request.getEmail(),
+                    buildEmail(request.getFirstname(), link));
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .build();
+        }
     }
 
     public int enableUser(String email) {
@@ -109,7 +82,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        //daca tot e ok generam token si il tirmitem inapoi
+
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() ->
                         new UsernameNotFoundException(
@@ -122,7 +95,7 @@ public class AuthenticationService {
                 .build();
     }
 
-//registration service
+
     @Transactional
     public String confirmToken(String token) {
 
@@ -138,7 +111,7 @@ public class AuthenticationService {
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 
         if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException("token expired"+expiredAt+"and local"+LocalDateTime.now());
+            throw new IllegalStateException("token expired" + expiredAt + "and local" + LocalDateTime.now());
 
         }
 
@@ -219,47 +192,3 @@ public class AuthenticationService {
 }
 
 
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//@RequiredArgsConstructor
-//public class AuthenticationService {
-//    private final UserRepository repository;
-//    private final PasswordEncoder passwordEncoder;
-//    private final JwtService jwtService;
-//    private final AuthenticationManager authenticationManager;
-//
-//    public AuthenticationResponse register(RegisterRequest request) {
-//        var user = User.builder()
-//                .firstname(request.getFirstname())
-//                .lastname(request.getLastname())
-//                .email(request.getEmail())
-//                .password(passwordEncoder.encode(request.getPassword()))
-//                .role(Role.USER)
-//                .build();
-//        repository.save(user);
-//        var jwtToken = jwtService.generateToken(user);
-//        return AuthenticationResponse.builder()
-//                .token(jwtToken)
-//                .build();
-//    }
-//
-//    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        request.getEmail(),
-//                        request.getPassword()
-//                )
-//        );
-//        var user = repository.findByEmail(request.getEmail())
-//                .orElseThrow();
-//        var jwtToken = jwtService.generateToken(user);
-//        return AuthenticationResponse.builder()
-//                .token(jwtToken)
-//                .build();
-//    }
-//}

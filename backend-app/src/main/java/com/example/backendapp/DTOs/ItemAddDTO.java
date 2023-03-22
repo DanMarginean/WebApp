@@ -1,6 +1,5 @@
 package com.example.backendapp.DTOs;
 
-import com.example.backendapp.entities.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-    public class ItemAddDTO {
+public class ItemAddDTO {
 
     private String brand;
 
@@ -30,8 +29,6 @@ import lombok.NoArgsConstructor;
 
     private int percentSale;
 
-//    private Image image;
-
     private String filePath;
-    }
+}
 
