@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -20,8 +19,6 @@ public class ItemCardDTO {
     private String name;
 
     private double price;
-
-//    private String category;
 
     private String descriere;
 
