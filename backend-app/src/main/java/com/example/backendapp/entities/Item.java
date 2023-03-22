@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -17,7 +15,7 @@ import java.util.UUID;
 @Table(name = "item")
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) //item: id, name,price,brand, model,dateOfAdd,cantitate,invoiceNumber,category,descriere
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "brand", nullable = false)
@@ -26,43 +24,33 @@ public class Item {
     @Column(nullable = false)
     private String name;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String serialNumber;
 
     @Column(name = "price")
     private double price;
 
-//    @Column(name = "generalCategory")
+
     private String generalCategory;
 
     @Column(name = "category")
     private String category;
 
-//    @Column(name = "dateOfAdd")
+
     private Date dateOfAdd;
 
     @Column(name = "descriere")
     private String descriere;
 
     @Column(name = "recenzie")
-    private String recenzie; // tre sa fac entitate recenzie legata one to many
+    private String recenzie;
 
     @Column(name = "quantity")
     private String quantity;
 
-//    @Column(name = "percentSale")
+
     private String percentSale;
 
-
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "item",
-//    joinColumns = {@JoinColumn(name = "item_id")},
-//    inverseJoinColumns = {
-//            @JoinColumn(name = "image_id")
-//    }
-//    )
-//
-//
 
     @ManyToOne
     @JoinColumn(name = "image_id")
@@ -70,6 +58,5 @@ public class Item {
 
     private String filePath;
 
-    //legare one to one cu cart entity
 
 }

@@ -1,6 +1,5 @@
 package com.example.backendapp.repositories;
 
-import com.example.backendapp.DTOs.ItemCardDTO;
 import com.example.backendapp.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
