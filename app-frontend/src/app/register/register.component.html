@@ -1,6 +1,6 @@
 <div>
   <form [formGroup]="registerForm">
-  <h1>Sign In</h1>
+    <h1>Sign In</h1>
     <div>Firstname:</div>
     <mat-form-field>
       <input matInput type="text" formControlName="firstname" placeholder="firstname">
@@ -9,23 +9,17 @@
     <mat-form-field>
       <input matInput type="text" formControlName="lastname" placeholder="lastname">
     </mat-form-field>
-  <div>Email:</div>
-  <mat-form-field>
-    <input matInput type="text" formControlName="email" placeholder="email">
-  </mat-form-field>
+    <div>Email:</div>
+    <mat-form-field>
+      <input matInput type="text" formControlName="email" placeholder="email">
+    </mat-form-field>
 
-  <div>Password:</div>
-  <mat-form-field>
-    <input matInput type="password" formControlName="password" placeholder="password">
-  </mat-form-field>
-<!--  <div>Confirm Password:</div>-->
-<!--  <mat-form-field>-->
-<!--    <input matInput type="text" [formControlName]="confirmpassword" placeholder="Address">-->
-<!--  </mat-form-field>-->
-<!--  <div>Dinamic inputs billing addres:</div>-->
-<!--  <mat-form-field>-->
-<!--    <input matInput type="text" formControlName="address" placeholder="Address">-->
-<!--  </mat-form-field>-->
-  <div><button mat-flat-button (click)="register()">Sign Up</button></div>
+    <div>Password:</div>
+    <mat-form-field>
+      <input matInput type="password" formControlName="password" placeholder="password">
+    </mat-form-field>
+    <div>
+      <button mat-flat-button (click)="register()">Sign Up</button>
+    </div>
   </form>
 </div>

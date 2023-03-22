@@ -1,57 +1,63 @@
 <div>
 
-    Add Product
+  Add Product
 
 
   <mat-dialog-content [formGroup]="addItemForm">
     <mat-form-field>
-      <input matInput  placeholder="Brand" formControlName="brand">
-    </mat-form-field><br/>
+      <input matInput placeholder="Brand" formControlName="brand">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="Name" formControlName="name">
-    </mat-form-field><br/>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="serialNumber" formControlName="serialNumber">
-    </mat-form-field><br/>
+      <input matInput placeholder="serialNumber" formControlName="serialNumber">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="price" formControlName="price">
-    </mat-form-field><br/>
+      <input matInput placeholder="price" formControlName="price">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="General category" formControlName="generalCategory">
-    </mat-form-field><br/>
+      <input matInput placeholder="General category" formControlName="generalCategory">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="Category" formControlName="category">
-    </mat-form-field><br/>
+      <input matInput placeholder="Category" formControlName="category">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="Descriere" formControlName="descriere">
-    </mat-form-field><br/>
+      <input matInput placeholder="Descriere" formControlName="descriere">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="Quantity" formControlName="quantity">
-    </mat-form-field><br/>
+      <input matInput placeholder="Quantity" formControlName="quantity">
+    </mat-form-field>
+    <br/>
     <mat-form-field>
-      <input matInput  placeholder="Sale percentage" formControlName="percentageSale">
-    </mat-form-field><br/>
-<!-- <mat-form-field>-->
-<!--      <input matInput [(ngModel)]="nft.id" placeholder="id" >-->
-<!--    </mat-form-field>-->
-<!--    <mat-form-field>-->
+      <input matInput placeholder="Sale percentage" formControlName="percentageSale">
+    </mat-form-field>
+    <br/>
+
     <div>
       <input type="file" multiple value="select" #selectFile
-        (change)="onFileSelected($event)">
+             (change)="onFileSelected($event)">
     </div>
-    <div >
-      <mat-grid-list cols="4" rowHeight="1:1" >
-      <mat-grid-tile *ngFor="let file of item.image">
-        <img [src]="file.url" width="50px" height="50px">
-      </mat-grid-tile>
+    <div>
+      <mat-grid-list cols="4" rowHeight="1:1">
+        <mat-grid-tile *ngFor="let file of item.image">
+          <img [src]="file.url" width="50px" height="50px">
+        </mat-grid-tile>
       </mat-grid-list>
       <img [src]="">
     </div>
-<!--    </mat-form-field>-->
-<div></div>
+
+    <div></div>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <button mat-raised-button  (click)="addItem()">Add</button>
+    <button mat-raised-button (click)="addItem()">Add</button>
   </mat-dialog-actions>
 </div>
