@@ -61,7 +61,7 @@ public class ItemService {
     }
 
     public List<Item> getAllItems() {
-//        List<Item> items = this.itemRepository.findAll();
+
 
         return itemRepository.findAll();
     }

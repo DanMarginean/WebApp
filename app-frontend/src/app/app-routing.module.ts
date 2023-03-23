@@ -33,16 +33,7 @@ const routes: Routes = [
     {path:'login', component: LoginComponent },
     {path:'register', component: RegisterComponent },
     {path:'**', component: ErrorComponent},
-  //rute shop=home, profile, cart, favorites
-  // shop rutes: freshwater,marine,ponds,forum,about us
-  // profile routes: comenzi, contul meu,
-  // cart routes: view, command
-  //   {path:'/nft',component:NftInterfaceComponent}
-  // ]
-  // }
-  // {path: 'homepage', component: HomepageComponent},
-  // {path: '', component: HomepageComponent},
-  // {path: 'product-list', component: ProductListComponent}
+
 ];
 
 @NgModule({
