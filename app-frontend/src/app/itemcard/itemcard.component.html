@@ -1,49 +1,30 @@
-
-
-
-<!--  rowHeigth o sa iau numarul de iteme din request il impart la 3 si adun 1 sa am nr de linii-->
-
-<!--    <a routerLink="/home">go to home</a>-->
-
-
-<!--  daca folosesc / inainte de path ma duce la abs
-olute path adica root url
-  la localhost4200+/home daca pun fara / ma duce la relative path adica linkul
-  activ plus path-ul pe care il dau localhost4200/about+/home
-  daca foloses ../home foloseste path-ul cu un level mai sus
-  ../../home 2 level up -->
-<!--    navigate programatically-->
-
-
-<!--<div [(ngModel)]="itemCards" *ngFor="let itemCard of itemCards" class="grid grid-cols-3 p-8 gap-8">-->
-<mat-grid-list [cols]="3" rowHeight="4:3" >
+<mat-grid-list [cols]="3" rowHeight="4:3">
   <button (click)="addItem()">Add</button>
-<mat-grid-tile *ngFor="let itemCard of itemCards"
-          colspan="1"
-          rowspan="1"
-          routerLink="/main/item-detail">
-    <mat-card class="card" >
+  <mat-grid-tile *ngFor="let itemCard of itemCards"
+                 colspan="1"
+                 rowspan="1"
+                 routerLink="/main/item-detail">
+    <mat-card class="card">
       <mat-card-header>
         <div mat-card-avatar class=""></div>
         <mat-card-title>
           {{itemCard.name}}
         </mat-card-title>
-<!--        <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
-<!--        <mat-card-subtitle>-->
-<!--        subtitlu-->
-<!--        </mat-card-subtitle>-->
       </mat-card-header>
-<!--      <img mat-card-image src="" alt="Photo of a Shiba Inu">-->
       <mat-card-content>
-        <div >
+        <div>
           <img [src]="getImageUrl(itemCard.bytes)" width="50px" height="50px" [alt]="itemCard.name">
         </div>
         <p>
           {{itemCard.descriere}}
         </p>
         <div>Price {{itemCard.price}}</div>
-       <button mat-flat-button  (click)="deleteItem(itemCard.id)"> <mat-icon>delete</mat-icon></button>
-       <button mat-flat-button  (click)="updateItem(itemCard.id)"> <mat-icon>update</mat-icon></button>
+        <button mat-flat-button (click)="deleteItem(itemCard.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-flat-button (click)="updateItem(itemCard.id)">
+          <mat-icon>update</mat-icon>
+        </button>
 
 
       </mat-card-content>
@@ -52,14 +33,8 @@ olute path adica root url
         <button mat-button>Favorites</button>
       </mat-card-actions>
     </mat-card>
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
   </mat-grid-tile>
 </mat-grid-list>
-<!--</mat-grid-list>-->
-<!--  <mat-grid-tile>2</mat-grid-tile>-->
-<!--  <mat-grid-tile>3</mat-grid-tile>-->
-<!--  <mat-grid-tile>4</mat-grid-tile>-->
-<!--  <mat-grid-tile>4</mat-grid-tile>-->
 
 
 <router-outlet></router-outlet>

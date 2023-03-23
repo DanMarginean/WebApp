@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {JwtConfig, JwtHelperService} from "@auth0/angular-jwt";
+import {Injectable} from '@angular/core';
+import {JwtHelperService} from "@auth0/angular-jwt";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -8,28 +8,33 @@ import {Router} from "@angular/router";
 export class AuthService {
 
   constructor(public jwtHelper: JwtHelperService,
-              private router:Router) { }
+              private router: Router) {
+  }
 
   public isLoggedIn(): boolean {
     const token = localStorage.getItem('token')
     return !this.jwtHelper.isTokenExpired(token);
   }
-  isTokenExpired():Boolean{
+
+  isTokenExpired(): Boolean {
     const token = localStorage.getItem('token')
 
     return this.jwtHelper.isTokenExpired(token)
   }
-  isLoggedOut():boolean{
+
+  isLoggedOut(): boolean {
     return !this.isLoggedIn();
   }
-  getRole(){
+
+  getRole() {
     return localStorage.getItem('role');
   }
 
   getToken() {
     return localStorage.getItem('token');
   }
-  logOut(){
+
+  logOut() {
     localStorage.clear();
     this.router.navigateByUrl('/login')
   }
