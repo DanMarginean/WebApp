@@ -42,19 +42,9 @@ public class ItemService {
     }
 
     public Item saveItem(ItemAddDTO itemAddDTO, MultipartFile file) throws IOException {
-//        String filePath = PATH + file.getOriginalFilename();
-//        Image image = Image.builder()
-//                .name(file.getOriginalFilename())
-//                .type(file.getContentType())
-//                .filePath(filePath)
-//                .build();
-//        file.transferTo(new File(filePath));
-//        itemAddDTO.setFilePath(imageService.uploadImageToFile(file));
-
 
         Item item = this.modelMapper.map(itemAddDTO, Item.class);
         item.setDateOfAdd(new Date());
-//        item.setFilePath(imageService.uploadImageToFile(file));'
         item.setImage(imageService.uploadImageToFile(file));
         itemRepository.save(item);
         return item;
