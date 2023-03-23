@@ -5,46 +5,41 @@
 
   <mat-dialog-content [formGroup]="updateItemForm">
     <mat-form-field>
-      <input matInput placeholder="Brand" formControlName="brand">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="Brand" formControlName="brand">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="Name" formControlName="name">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="Name" formControlName="name">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="serialNumber" formControlName="serialNumber">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="serialNumber" formControlName="serialNumber">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="price" formControlName="price">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="price" formControlName="price">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="General category" formControlName="generalCategory">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="General category" formControlName="generalCategory">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="Category" formControlName="category">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="Category" formControlName="category">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="Descriere" formControlName="descriere">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="Descriere" formControlName="descriere">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="Quantity" formControlName="quantity">
-    </mat-form-field>
-    <br/>
+      <input matInput  placeholder="Quantity" formControlName="quantity">
+    </mat-form-field><br/>
     <mat-form-field>
-      <input matInput placeholder="Sale percentage" formControlName="percentageSale">
-    </mat-form-field>
-    <br/>
-
+      <input matInput  placeholder="Sale percentage" formControlName="percentageSale">
+    </mat-form-field><br/>
+    <!-- <mat-form-field>-->
+    <!--      <input matInput [(ngModel)]="nft.id" placeholder="id" >-->
+    <!--    </mat-form-field>-->
     <div></div>
   </mat-dialog-content>
 
   <mat-dialog-actions>
     <button mat-raised-button (click)="updateItem()">Update</button>
+<!--    am zis aici ca pun un in[put deala sa trimit in aia de dialog id ul sa stie pe care sa il modifice
+am si salvat un video pe yyt cu asta -->
   </mat-dialog-actions>
 </div>

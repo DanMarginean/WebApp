@@ -1,25 +1,30 @@
-.app {
+.app{
   overflow-x: hidden;
 }
-
-.rightHeader {
+.rightHeader{
   display: flex;
   position: relative;
   align-items: flex-end;
   justify-items: end;
   justify-content: flex-end;
+
+  /*margin-left: 80%;*/
   padding: 10px;
 }
-
-.toolbar {
+.toolbar{
   color: white;
   background-color: darkred;
   position: sticky;
-  position: -webkit-sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
   top: 0;
   z-index: 1000;
   align-items: center;
 
 }
 
-
+/*.app-toolbar {*/
+/*  position: sticky;*/
+/*  position: -webkit-sticky; !* For macOS/iOS Safari *!*/
+/*  top: 0; !* Sets the sticky toolbar to be on top *!*/
+/*  z-index: 1000; !* Ensure that your app's content doesn't overlap the toolbar *!*/
+/*}*/

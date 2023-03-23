@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {ItemcardComponent} from "./itemcard/itemcard.component";
 
 @Injectable({
@@ -6,10 +6,9 @@ import {ItemcardComponent} from "./itemcard/itemcard.component";
 })
 export class CommunicationService {
 
-  constructor(private item: ItemcardComponent) {
-  }
+  constructor(private item:ItemcardComponent) { }
 
-  refreshItems() {
+  refreshItems(){
     this.item.getAllItems();
   }
 }

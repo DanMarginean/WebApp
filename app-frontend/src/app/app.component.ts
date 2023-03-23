@@ -8,38 +8,35 @@ import {ItemCardService} from "./itemcard/item-card.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
   title = 'app-frontend';
-  isHover = false;
-
-  constructor(private auth: AuthService,
-              private route: Router,
-              private itemCardService: ItemCardService) {
+  isHover=false;
+  constructor(private auth:AuthService,
+              private route:Router,
+              private itemCardService:ItemCardService) {
 
 
   }
 
-  ngOnInit() {
-    if (this.auth.isTokenExpired()) {
-      this.logOut()
-    }
-    this.itemCardService.getAllItemCards();
+  ngOnInit() {if(this.auth.isTokenExpired()){
+    this.logOut()
+  }
+  this.itemCardService.getAllItemCards();
   }
 
-  logOut() {
+  logOut(){
     this.auth.logOut();
-  }
-
-  logIn() {
+ }
+ logIn(){
     this.route.navigateByUrl("/login");
-  }
+ }
+ isLoggedIn():Boolean{
+   // console.log(this.auth.isLoggedIn());
+   return this.auth.isLoggedIn();
 
-  isLoggedIn(): Boolean {
-    return this.auth.isLoggedIn();
-
-  }
-
-  isLoggedOut(): Boolean {
+ }
+  isLoggedOut():Boolean{
+    // console.log(this.auth.isLoggedOut());
     return this.auth.isLoggedOut();
   }
 }
