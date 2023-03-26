@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {ItemAdd} from "../models/itemAdd";
 import {ItemCard} from "../models/itemCard";
+import {FilterParams} from "../models/filterParams";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class ItemCardService implements OnInit {
   itemcardEndpoint = environment.apiEndpoints.itemcard;
   deleteCardEndpoint = environment.apiEndpoints.deleteCard;
   updateCardEndpoint = environment.apiEndpoints.updateCard;
+  searchEndpoint = environment.apiEndpoints.search;
   checkUpdate = false;
 
   constructor(private http: HttpClient,
@@ -37,5 +39,8 @@ export class ItemCardService implements OnInit {
 
   }
 
+  filterItems(params : FilterParams) {
+    return this.http.post<ItemCard[]>(this.url+this.searchEndpoint,params)
 
+  }
 }

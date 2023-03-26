@@ -85,5 +85,9 @@ export class MainComponent implements OnInit {
     this.route.navigateByUrl("home");
   }
 
+getItems(){
+    const dataSend = true;
+    this.route.navigateByUrl("/main/items");
 
+}
 }

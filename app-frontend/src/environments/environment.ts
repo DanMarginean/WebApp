@@ -9,7 +9,8 @@ export const environment = {
     itemcard:"cards",
     addProduct:"items",
     deleteCard:"delete/",
-    updateCard:"update/"
+    updateCard:"update/",
+    search:"search"
   },
   apiURLauth:"http://localhost:8081/api/v1/auth/",
   apiEndpointsauth:{

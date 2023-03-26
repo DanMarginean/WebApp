@@ -23,7 +23,7 @@
 
         <mat-menu #freshwater="matMenu">
             <span (mouseleave)="menuFreshwaterTrigger.closeMenu()">
-            <button mat-menu-item [matMenuTriggerFor]="fishesFreshwater" routerLink="items">Aquarium Fish</button>
+            <button mat-menu-item [matMenuTriggerFor]="fishesFreshwater" (click)="getItems()">Aquarium Fish</button>
             <button mat-menu-item [matMenuTriggerFor]="filtersFreshwater">Filters</button>
             <button mat-menu-item [matMenuTriggerFor]="accesoriesFreshwater">Accesories</button>
             <button mat-menu-item [matMenuTriggerFor]="foodFreshwater">Food</button>
@@ -182,11 +182,13 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-
+      <div class="header-container">
+      <div class="leftHeader">
       <button mat-icon-button class="example-icon">
         <mat-icon (click)="drawer.toggle()">menu</mat-icon>
       </button>
-      <span>My App</span>
+      <span >FishParadise</span>
+      </div>
       <div class="rightHeader">
         <button mat-icon-button>
           <mat-icon>favorite</mat-icon>
@@ -205,6 +207,7 @@
         <button mat-icon-button routerLink="/cart">
           <mat-icon>shopping_cart</mat-icon>
         </button>
+      </div>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

@@ -1,19 +1,32 @@
-<mat-grid-list [cols]="3" rowHeight="4:3">
-  <button (click)="addItem()">Add</button>
+<mat-grid-list [cols]="3" rowHeight="4:3" gutterSize="15px">
+  <div class="search-container">
+    <div class="search-left">
+    <button (click)="addItem()">Add</button>
+      <button>
+        <mat-icon>list</mat-icon>
+      </button>
+  </div>
+  <div class="search">
+
+    <input placeholder="Search by ..." [(ngModel)]="filterParams.searchString">
+    <span class="a-search"><mat-icon (click)="searchedItems(filterParams)">search</mat-icon></span>
+<!--    <span *ngIf="searchString" class="a-search-close" (click)="searchString = ''"><mat-icon>close</mat-icon></span>-->
+  </div>
+  </div>
   <mat-grid-tile *ngFor="let itemCard of itemCards"
                  colspan="1"
                  rowspan="1"
-                 routerLink="/main/item-detail">
-    <mat-card class="card">
+                 >
+    <mat-card class="card" >
       <mat-card-header>
         <div mat-card-avatar class=""></div>
-        <mat-card-title>
+        <mat-card-title routerLink="/main/item-detail">
           {{itemCard.name}}
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div>
-          <img [src]="getImageUrl(itemCard.bytes)" width="50px" height="50px" [alt]="itemCard.name">
+        <div >
+          <img [src]="getImageUrl(itemCard.bytes)" width="50px" height="50px" [alt]="itemCard.name" routerLink="/main/item-detail">
         </div>
         <p>
           {{itemCard.descriere}}
@@ -23,7 +36,7 @@
           <mat-icon>delete</mat-icon>
         </button>
         <button mat-flat-button (click)="updateItem(itemCard.id)">
-          <mat-icon>update</mat-icon>
+          <mat-icon>cloud_upload</mat-icon>
         </button>
 
 

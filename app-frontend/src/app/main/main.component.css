@@ -15,3 +15,23 @@
   top: 0;
   z-index: 1;
 }
+
+.header-container{
+/*position: relative;*/
+  display: flex;
+  align-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.leftHeader{
+  /*background-color: lightblue;*/
+
+  align-items: start;
+}
+
+.rightHeader{
+  /*background-color: lightgreen;*/
+/*position: absolute;*/
+  align-items: end;
+}

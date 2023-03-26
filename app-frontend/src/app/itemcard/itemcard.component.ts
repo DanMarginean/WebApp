@@ -6,6 +6,7 @@ import {AddDialogComponent} from "../add-dialog/add-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {UpdateDialogComponent} from "../update-dialog/update-dialog.component";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {FilterParams} from "../models/filterParams";
 
 @Component({
   selector: 'app-itemcard',
@@ -15,6 +16,7 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 export class ItemcardComponent implements OnInit {
   itemCards: ItemCard[] = [];
   itemId: string;
+  searchString : string;
 
   itemcard: ItemCard = {
     id: "id",
@@ -24,6 +26,13 @@ export class ItemcardComponent implements OnInit {
     filePath: null,
     bytes: null,
     image: null
+  }
+
+  filterParams:FilterParams = {
+    brand:"",
+    name:"",
+    price:"",
+    searchString:""
   }
 
   constructor(private itemcardService: ItemCardService,
@@ -46,8 +55,13 @@ export class ItemcardComponent implements OnInit {
         console.log(itemCards)
         this.itemCards = itemCards
       });
+  }
 
-
+  searchedItems(filterParams :FilterParams){
+    this.itemcardService.filterItems(filterParams).subscribe(itemcards => {
+      console.log(itemcards);
+      this.itemCards=itemcards
+    })
   }
 
   getImageUrl(imageBytes: string): SafeUrl {
