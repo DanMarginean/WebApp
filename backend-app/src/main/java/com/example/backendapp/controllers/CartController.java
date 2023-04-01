@@ -1,5 +1,6 @@
 package com.example.backendapp.controllers;
 
+import com.example.backendapp.DTOs.CartDTO;
 import com.example.backendapp.entities.Cart;
 import com.example.backendapp.services.CartService;
 import org.apache.tomcat.util.http.parser.Authorization;
@@ -20,11 +21,10 @@ public class CartController {
     public CartController(CartService cartService){
         this.cartService = cartService;
     }
-    @PostMapping("/addCart/{id}")
-    public void addToCart(@PathVariable UUID id, Authentication authentication)
+//    @PostMapping("/addCart/{id}")
+    @GetMapping("addCart/{id}")
+    public CartDTO addToCart(@PathVariable UUID id, Authentication authentication)
     {
-
-
-         cartService.addToCart(id,authentication);
+        return cartService.addToCart(id,authentication);
     }
 }

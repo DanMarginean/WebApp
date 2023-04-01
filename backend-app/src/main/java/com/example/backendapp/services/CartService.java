@@ -44,7 +44,7 @@ public class CartService {
         this.userDetailsService = userDetailsService;
     }
 
-    public void addToCart(UUID itemId, Authentication authentication) {
+    public CartDTO addToCart(UUID itemId, Authentication authentication) {
         Item item = this.itemRepository.findById(itemId).get();
         User user = this.userRepository.findByEmail(authentication.getName()).get();
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(user.getUsername());
@@ -54,6 +54,6 @@ public class CartService {
             this.cartRepository.save(cart);
 
 //        }
-
+    return cartDTO;
     }
 }
