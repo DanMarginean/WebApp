@@ -51,8 +51,6 @@ public class ItemService {
     }
 
     public List<Item> getAllItems() {
-
-
         return itemRepository.findAll();
     }
 
@@ -90,10 +88,6 @@ public class ItemService {
             ItemCardDTO itemCardDTO = modelMapper.map(item, ItemCardDTO.class);
 
             try {
-                System.out.println("aicea");
-                System.out.println(item.getImage().getFilePath());
-
-
                 itemCardDTO.setBytes(imageService.downloadImageFromFile(item.getImage().getFilePath()));
 
             } catch (Exception e) {
@@ -106,7 +100,6 @@ public class ItemService {
 
         }
 
-        System.out.println(itemCardDTOList);
         return itemCardDTOList;
     }
 

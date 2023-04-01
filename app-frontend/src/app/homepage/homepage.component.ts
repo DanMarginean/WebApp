@@ -14,44 +14,44 @@ import {Router} from "@angular/router";
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  isExpanded:boolean=true;
-  showNavigationArrows = false;
-  showNavigationIndicators = false;
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
-  // itemCards:ItemCard[]=[];
-  isPressed:boolean=false;
-  // itemcard:ItemCard={
-  //   name:"name",
-  //   price:"price",
-  //   descriere:"desc"
-  // }
-
-  constructor(private dialog:MatDialog,
-              private carousel:NgbCarousel,
-              private auth:AuthService,
-              private router:Router,
-              private itemcardService:ItemCardService) {
-    carousel.showNavigationArrows = true;
-    carousel.showNavigationIndicators = true;
-  }
-
+//   isExpanded:boolean=true;
+//   showNavigationArrows = false;
+//   showNavigationIndicators = false;
+//   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+//   // itemCards:ItemCard[]=[];
+//   isPressed:boolean=false;
+//   // itemcard:ItemCard={
+//   //   name:"name",
+//   //   price:"price",
+//   //   descriere:"desc"
+//   // }
+//
+//   constructor(private dialog:MatDialog,
+//               private carousel:NgbCarousel,
+//               private auth:AuthService,
+//               private router:Router,
+//               private itemcardService:ItemCardService) {
+//     carousel.showNavigationArrows = true;
+//     carousel.showNavigationIndicators = true;
+//   }
+//
   ngOnInit(): void {
     // this.itemCardService.getAllItemCards();
   }
-extendState():void{
-    this.isExpanded=!this.isExpanded;
-
-}
-isAdmin():Boolean{
-   if(this.auth.getRole()==="ADMIN") return true;
-   else return false
-}
-openAddDialog(){
-    this.dialog.open(AddDialogComponent);
-}
-showItems(){
-    this.router.navigateByUrl("home");
-}
+// extendState():void{
+//     this.isExpanded=!this.isExpanded;
+//
+// }
+// isAdmin():Boolean{
+//    if(this.auth.getRole()==="ADMIN") return true;
+//    else return false
+// }
+// openAddDialog(){
+//     this.dialog.open(AddDialogComponent);
+// }
+// showItems(){
+//     this.router.navigateByUrl("home");
+// }
   // getAllItems():void{
   //   this.itemcardService.getAllItemCards().subscribe(itemCards =>{
   //     console.log(itemCards)

@@ -1,24 +1,42 @@
 package com.example.backendapp.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.backendapp.Security.User;
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity(name = "Cart")
+@Table(name = "Cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Item[] items;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
-    private double total;
+    @OneToOne
+    @JoinColumn(name = "_user_id")
+    private User user;
 
-    private String billingAdress;
+    public Cart(Item item, User user) {
+        this.item = item;
+        this.user = user;
+    }
+//    private double total;
 
-    private String shippingAdress;
-
-    private Date dateOfPurchase;
+//    private String billingAdress;
+//
+//    private String shippingAdress;
+//
+//    private Date dateOfPurchase;
 
 
 }

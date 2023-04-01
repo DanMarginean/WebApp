@@ -17,7 +17,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    private final String PATH = "C:/Users/digid/OneDrive/Desktop/imagePath/";
+    private final String PATH = "C:/Users/danma/Desktop/ImagePath/";
 
     public Image uploadImageToFile(MultipartFile file) throws IOException {
 

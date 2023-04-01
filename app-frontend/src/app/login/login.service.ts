@@ -23,7 +23,7 @@ export class LoginService {
       localStorage.setItem('token', userData.token);
       localStorage.setItem('role', userData.role)
       console.log(userData);
-      this.router.navigateByUrl("/home")
+      this.router.navigateByUrl("/main")
       return userData;
     }));
   }
