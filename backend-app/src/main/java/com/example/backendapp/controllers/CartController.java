@@ -21,9 +21,9 @@ public class CartController {
         this.cartService = cartService;
     }
     @PostMapping("/addCart/{id}")
-    public void addToCart(@PathVariable UUID id, Authentication authentication) //@RequestPart("id") UUID id, @RequestPart("token") String token
+    public void addToCart(@PathVariable UUID id, Authentication authentication)
     {
-//        String token = Authorization.firstValue("Authorization").get().toString();
+
 
          cartService.addToCart(id,authentication);
     }
