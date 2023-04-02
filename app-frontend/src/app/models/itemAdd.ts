@@ -10,6 +10,6 @@ export interface ItemAdd{
   category:string;
   descriere:string;
   quantity:string;
-  percentSale:string;
+  percentSale:string
   image:ImageFile[];
 }

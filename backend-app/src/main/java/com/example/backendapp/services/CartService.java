@@ -8,15 +8,15 @@ import com.example.backendapp.entities.Item;
 import com.example.backendapp.repositories.CartRepository;
 import com.example.backendapp.repositories.ItemRepository;
 import com.example.backendapp.repositories.UserRepository;
-import com.sun.istack.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+
 
 @Service
 public class CartService {
@@ -26,7 +26,7 @@ public class CartService {
     private CartRepository cartRepository;
     private ItemRepository itemRepository;
     private UserRepository userRepository;
-    private  UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
     public final ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
@@ -44,16 +44,42 @@ public class CartService {
         this.userDetailsService = userDetailsService;
     }
 
-    public CartDTO addToCart(UUID itemId, Authentication authentication) {
+    public CartDTO addToCart(UUID itemId, Integer quantity, Authentication authentication) {
         Item item = this.itemRepository.findById(itemId).get();
         User user = this.userRepository.findByEmail(authentication.getName()).get();
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(user.getUsername());
-//        if (item != null && user != null) {
-            CartDTO cartDTO = new CartDTO(item,user);
-            Cart cart = this.modelMapper.map(cartDTO,Cart.class);
+        CartDTO cartDTO = new CartDTO();
+        if (quantity == null) {
+            quantity = 1;
+        }
+        Cart cartc = this.cartRepository.findByItem(item);
+        if (cartc != null) {
+            if (cartc.getItem().getId().equals(item.getId())) {
+                if (cartc.getQuantity() == null) {
+                    cartc.setQuantity(1);
+                }
+                cartc.setQuantity(cartc.getQuantity() + quantity);
+                cartDTO = this.modelMapper.map(cartc, CartDTO.class);
+                this.cartRepository.save(cartc);
+            }
+        } else {
+            cartDTO.setQuantity(quantity);
+            cartDTO.setUser(user);
+            cartDTO.setItem(item);
+            Cart cart = this.modelMapper.map(cartDTO, Cart.class);
             this.cartRepository.save(cart);
 
-//        }
-    return cartDTO;
+        }
+        return cartDTO;
+    }
+
+    public List<Cart> getCartDetails() {
+        String userEmail = JwtAuthenticationFilter.userEmail;
+        User user = this.userRepository.findByEmail(userEmail).get();
+        List<Cart> cartList = this.cartRepository.findByUser(user);
+        return cartList;
+    }
+
+    public void deleteCart(Long id) {
+        this.cartRepository.deleteById(id);
     }
 }

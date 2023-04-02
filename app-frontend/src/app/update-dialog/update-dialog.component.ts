@@ -32,7 +32,7 @@ export class UpdateDialogComponent {
     generalCategory: "",
     category: "",
     descriere: "",
-    quantity: "",
+    quantity:"",
     percentSale: "",
     image: []
   }

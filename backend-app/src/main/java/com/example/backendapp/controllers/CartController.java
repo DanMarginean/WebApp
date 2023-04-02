@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpHeaders;
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -22,9 +23,20 @@ public class CartController {
         this.cartService = cartService;
     }
 //    @PostMapping("/addCart/{id}")
-    @GetMapping("addCart/{id}")
-    public CartDTO addToCart(@PathVariable UUID id, Authentication authentication)
+    @GetMapping("addCart/{id}/{quantity}")
+    public CartDTO addToCart(@PathVariable(name = "id") UUID id, @PathVariable(name = "quantity") Integer quantity, Authentication authentication)
     {
-        return cartService.addToCart(id,authentication);
+        return cartService.addToCart(id,quantity,authentication);
+    }
+
+    @GetMapping("/getCartDetails")
+    public List<Cart> getCartDetails(){
+        return cartService.getCartDetails();
+    }
+
+    @DeleteMapping("/deleteCart/{id}")
+    public void deteleCart(@PathVariable(name = "id") Long id){
+        this.cartService.deleteCart(id);
+
     }
 }

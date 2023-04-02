@@ -6,6 +6,7 @@ export interface ItemCard {
   price: string;
   descriere: string;
   filePath: SafeUrl;
+  quantity:number;
   bytes: string;
   image: File;
 }

@@ -23,6 +23,7 @@ public class ItemCardDTO {
     private String descriere;
 
     private String filePath;
+    private Integer quantity;
     private byte[] bytes;
     private Image image;
 

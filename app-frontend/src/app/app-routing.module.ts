@@ -23,12 +23,13 @@ const routes: Routes = [
     children: [
       {path: 'items', component: ItemcardComponent},
       {
-        path: 'items/:id', component: ItemcardComponent,
+        path: 'items/:id', component: ItemcardComponent,canActivate:[AuthGuardService]
       },
-      {path: 'item-detail', component: ItemDetailsComponent}
+      {path: 'item-detail', component: ItemDetailsComponent},
+      {path: 'cart', component: CartComponent,canActivate:[AuthGuardService]},
     ]
   },
-  {path: 'cart', component: CartComponent},
+
   {
     path: 'profile', component: ErrorComponent,
     canActivate: [AuthGuardService]

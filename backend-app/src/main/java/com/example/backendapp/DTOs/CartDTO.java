@@ -17,5 +17,7 @@ public class CartDTO {
 
     private User user;
 
+    private Integer quantity;
+
 
 }

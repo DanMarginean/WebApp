@@ -7,6 +7,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {UpdateDialogComponent} from "../update-dialog/update-dialog.component";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FilterParams} from "../models/filterParams";
+import {CartService} from "../cart/cart.service";
+import {ToastMessegesService} from "../toast-messeges/toast-messeges.service";
+import {Cart} from "../models/Cart";
 
 @Component({
   selector: 'app-itemcard',
@@ -24,6 +27,7 @@ export class ItemcardComponent implements OnInit {
     price: "price",
     descriere: "desc",
     filePath: null,
+    quantity:null,
     bytes: null,
     image: null
   }
@@ -35,12 +39,23 @@ export class ItemcardComponent implements OnInit {
     searchString:""
   }
 
+  cart:Cart = {
+    id:null,
+    item:null,
+    quantity:null,
+    total:null
+  }
+
+  quantity:number = 1;
+
   constructor(private itemcardService: ItemCardService,
               private route: ActivatedRoute,
               private router: Router,
               private updateDialog: MatDialog,
               private dialog: MatDialog,
-              private sanitizer: DomSanitizer
+              private sanitizer: DomSanitizer,
+              private cartService:CartService,
+              private toastMess:ToastMessegesService
   ) {
   }
 
@@ -104,4 +119,17 @@ export class ItemcardComponent implements OnInit {
   openPhoto(url) {
     window.open(url, null)
   }
+
+  addCart(id:string) : void{
+console.log(id);
+   this.itemCards.filter(card =>{if (card.id === id && card.quantity >= this.quantity){
+     this.cartService.addCart(id,this.quantity).subscribe( cart=>{
+       this.toastMess.showToast(cart.item.name+" adaugat in cos","info")
+       console.log(cart);}) // fac o clasa cu lista de cart
+   }else {
+     this.toastMess.showToast("Cantitate insuficienta pe stoc","error")}
+   }
+   )
+
+}
 }

@@ -46,10 +46,9 @@ public class Item {
     private String recenzie;
 
     @Column(name = "quantity")
-    private String quantity;
+    private Integer quantity;
 
-
-    private String percentSale;
+    private Integer percentSale;
 
 
     @ManyToOne

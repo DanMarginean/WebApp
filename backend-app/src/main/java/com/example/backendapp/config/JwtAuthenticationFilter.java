@@ -21,10 +21,10 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final  JwtService jwtService; //final fara static
+    private final JwtService jwtService; //final fara static
     private final UserDetailsService userDetailsService;
 
-    public static String userEmail ;
+    public static String userEmail;
 
     @Override
     protected void doFilterInternal(
@@ -34,6 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwtToken;
+
 //        final String userEmail;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);

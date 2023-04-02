@@ -38,6 +38,8 @@ import { MatListModule } from '@angular/material/list';
 import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { CartComponent } from './cart/cart.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -58,28 +60,30 @@ import { CartComponent } from './cart/cart.component';
     ItemDetailsComponent,
     CartComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatGridListModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatCardModule,
-        HttpClientModule,
-        FormsModule,
-        MatDividerModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatMenuModule,
-        NgbModule,
-        LayoutModule,
-        MatListModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatCardModule,
+    HttpClientModule,
+    FormsModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    NgbModule,
+    LayoutModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatTableModule
+  ],
   providers: [
     AuthService,
     JwtHelperService,

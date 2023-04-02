@@ -1,1 +1,74 @@
-<p>cart works!</p>
+<div class="mat-elevation-z8">
+
+  <div>
+    <button mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+  </div>
+
+  <table mat-table [dataSource]="cartDetails">
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.item.name}} </td>
+    </ng-container>
+
+    <!-- Brand Column -->
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef> Brand</th>
+      <td mat-cell *matCellDef="let element"> {{element.item.brand}} </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price</th>
+      <td mat-cell *matCellDef="let element"> {{element.item.price}} </td>
+    </ng-container>
+
+    <!-- SN Column -->
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef> SerialNumber</th>
+      <td mat-cell *matCellDef="let element"> {{element.item.serialNumber}} </td>
+    </ng-container>
+
+    <!-- PercentSale Column -->
+    <ng-container matColumnDef="sale">
+      <th mat-header-cell *matHeaderCellDef> Sale%</th>
+      <td mat-cell *matCellDef="let element"> {{element.item.percentSale}} </td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity</th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="deleteCartDetails(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button>
+          <mat-icon>update</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Final Price Column -->
+    <ng-container matColumnDef="final_price">
+      <th mat-header-cell *matHeaderCellDef> Final Price</th>
+      <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div>
+    Total Price : {{totalCart}}
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

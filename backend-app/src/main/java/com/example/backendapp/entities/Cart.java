@@ -4,6 +4,7 @@ import com.example.backendapp.Security.User;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 
 @Getter
@@ -25,6 +26,8 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "_user_id")
     private User user;
+
+    private Integer quantity;
 
     public Cart(Item item, User user) {
         this.item = item;
