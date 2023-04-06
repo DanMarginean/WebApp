@@ -2,7 +2,7 @@ package com.example.backendapp.services;
 
 import com.example.backendapp.DTOs.OrderDTO;
 import com.example.backendapp.entities.OrderDetail;
-import com.example.backendapp.entities.OrderQuantity;
+import com.example.backendapp.entities.OrderItem;
 import com.example.backendapp.repositories.CartRepository;
 import com.example.backendapp.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrderService {
+public class OrderDetailService {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -20,11 +20,15 @@ public class OrderService {
     public final ModelMapper modelMapper = new ModelMapper();
 
     public void placeOrder(OrderDTO orderDTO) {
-        List<OrderQuantity> orderQuantityList = orderDTO.getOrderQuantityList();
-        orderQuantityList.forEach(orderQuantity -> {
+        List<OrderItem> orderItemList = orderDTO.getOrderItemList();
+        orderItemList.forEach(orderItem -> {
 
             OrderDetail orderDetail = this.modelMapper.map(orderDTO, OrderDetail.class);
 
         });
+    }
+
+    public void saveOrder(){
+
     }
 }
