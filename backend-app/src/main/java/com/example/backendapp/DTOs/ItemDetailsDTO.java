@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemAddDTO {
-
+public class ItemDetailsDTO {
     private String brand;
 
     private String name;
@@ -30,6 +29,6 @@ public class ItemAddDTO {
 
     private int percentSale;
 
+    private byte[] bytes;
     private Image image;
 }
-

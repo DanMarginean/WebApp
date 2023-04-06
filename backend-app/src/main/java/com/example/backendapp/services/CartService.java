@@ -47,26 +47,37 @@ public class CartService {
     public CartDTO addToCart(UUID itemId, Integer quantity, Authentication authentication) {
         Item item = this.itemRepository.findById(itemId).get();
         User user = this.userRepository.findByEmail(authentication.getName()).get();
+        List<Cart> carts = this.cartRepository.findByUser(user);
         CartDTO cartDTO = new CartDTO();
         if (quantity == null) {
             quantity = 1;
         }
-        Cart cartc = this.cartRepository.findByItem(item);
+
+        Cart cartc = this.cartRepository.findByItemAndUser(item, user);
         if (cartc != null) {
             if (cartc.getItem().getId().equals(item.getId())) {
                 if (cartc.getQuantity() == null) {
                     cartc.setQuantity(1);
                 }
                 cartc.setQuantity(cartc.getQuantity() + quantity);
-                cartDTO = this.modelMapper.map(cartc, CartDTO.class);
-                this.cartRepository.save(cartc);
+                if (cartc.getQuantity() <= item.getQuantity()) {
+                    cartDTO = this.modelMapper.map(cartc, CartDTO.class);
+                    this.cartRepository.save(cartc);
+                } else {
+                    throw new RuntimeException("Cantitate insuficienta");
+                }
             }
         } else {
-            cartDTO.setQuantity(quantity);
-            cartDTO.setUser(user);
-            cartDTO.setItem(item);
-            Cart cart = this.modelMapper.map(cartDTO, Cart.class);
-            this.cartRepository.save(cart);
+            if (item.getQuantity() >= quantity) {
+                cartDTO.setQuantity(quantity);
+                cartDTO.setUser(user);
+                cartDTO.setItem(item);
+                Cart cart = new Cart();
+                cart = this.modelMapper.map(cartDTO, Cart.class);
+                this.cartRepository.save(cart);
+            } else {
+                throw new RuntimeException("Cantitate insuficienta");
+            }
 
         }
         return cartDTO;

@@ -14,15 +14,8 @@ export class DialogService {
   endpoint=environment.apiEndpoints.addProduct;
   constructor(private http:HttpClient) { }
 
-  updateByID(id:string,nft:Nft):Observable<Object>{
-    return this.http.put(this.url+this.endpoint+id,nft);
-  }
   addItem(item:FormData):Observable<any>{ //itemAdd
-    console.log("ad");
-    return this.http.post<ItemAdd>("http://localhost:8081/api/items",item);
+    return this.http.post<ItemAdd>(this.url+this.endpoint,item);
   }
 
-  updateItemS(itemId:string,item:ItemAdd):Observable<ItemAdd>{
-    return this.http.put<ItemAdd>(this.url+this.endpoint+itemId,item);
-  }
 }

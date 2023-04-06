@@ -1,11 +1,12 @@
 package com.example.backendapp.DTOs;
 
-import com.example.backendapp.entities.OrderQuantity;
+import com.example.backendapp.entities.OrderItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,10 +16,10 @@ import java.util.List;
 public class OrderDTO {
 
     private String orderEmail;
-    private String orderName;
+    private String orderFirstName;
+    private String orderLastName;
+
     private String orderAdress;
     private String contactNumber;
-//    private String orderStatus;
-//    private Double orderAmount;
-    private List<OrderQuantity> orderQuantityList;
+
 }

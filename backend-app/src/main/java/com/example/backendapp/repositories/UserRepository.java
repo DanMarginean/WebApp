@@ -12,8 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmail(String email);
 
-    Optional<Boolean> existsUserByEnabledTrue();
-
     @Transactional
     @Modifying
     @Query("UPDATE User a " +

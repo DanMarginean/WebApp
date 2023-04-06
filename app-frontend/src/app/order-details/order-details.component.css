@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personalData {
+  width: 50%;
+  /*background-color: blue;*/
+}
+
+.orderItems {
+  width: 50%;
+  /*background-color: red;*/
+}
+.table{
+  width: 80%;
+
+}

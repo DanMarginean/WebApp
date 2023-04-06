@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="personalData">
+    <form [formGroup]="orderForm">
+      <h1>Contact details</h1>
+
+      <div>Firstname:</div>
+      <mat-form-field>
+        <input matInput type="text" formControlName="firstname" placeholder="firstname">
+      </mat-form-field>
+
+      <div>Lastname:</div>
+      <mat-form-field>
+        <input matInput type="text" formControlName="lastname" placeholder="lastname">
+      </mat-form-field>
+
+      <div>Email:</div>
+      <mat-form-field>
+        <input matInput type="text" formControlName="email" placeholder="email">
+      </mat-form-field>
+
+      <div>Contact Number</div>
+      <mat-form-field>
+        <input matInput type="text" formControlName="contactNumber" placeholder="Contact Number">
+      </mat-form-field>
+
+      <div>Adress</div>
+      <mat-form-field>
+        <input matInput type="text" formControlName="adress" placeholder="Adress">
+      </mat-form-field>
+
+      <div>
+        <button mat-flat-button (click)="placeOrder()">Place Order</button>
+      </div>
+    </form>
+  </div>
+  <div class="orderItems">
+    <table mat-table [dataSource]="orderDetails" class="table">
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.item.name}} </td>
+      </ng-container>
+
+      <!-- Brand Column -->
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef> Brand</th>
+        <td mat-cell *matCellDef="let element"> {{element.item.brand}} </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price</th>
+        <td mat-cell *matCellDef="let element"> {{element.item.price}} </td>
+      </ng-container>
+
+      <!-- SN Column -->
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef> SerialNumber</th>
+        <td mat-cell *matCellDef="let element"> {{element.item.serialNumber}} </td>
+      </ng-container>
+
+      <!-- PercentSale Column -->
+      <ng-container matColumnDef="sale">
+        <th mat-header-cell *matHeaderCellDef> Sale%</th>
+        <td mat-cell *matCellDef="let element"> {{element.item.percentSale}} </td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity</th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+
+      <!-- Final Price Column -->
+      <ng-container matColumnDef="final_price">
+        <th mat-header-cell *matHeaderCellDef> Final Price</th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div>
+      <span *ngIf="!isFreeShipping()">Shipping : {{shipping}}</span>
+      <span *ngIf="isFreeShipping()">Transport gratuit</span>
+    </div>
+    <div>
+      Total Price : {{totalCart}}
+    </div>
+  </div>
+
+</div>
+
+
+<router-outlet></router-outlet>

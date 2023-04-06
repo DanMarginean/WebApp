@@ -13,7 +13,11 @@ export const environment = {
     search:"search",
     addCart:"addCart/",
     cartDetails:"getCartDetails",
-    deleteCart: "deleteCart/"
+    deleteCart: "deleteCart/",
+    checkout: "checkout",
+    getItem: "items/",
+    placeOrder: "placeOrder",
+    getItemDetails:"itemDetails/"
   },
   apiURLauth:"http://localhost:8081/api/v1/auth/",
   apiEndpointsauth:{

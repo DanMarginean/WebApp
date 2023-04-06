@@ -2,6 +2,7 @@ package com.example.backendapp.services;
 
 import com.example.backendapp.DTOs.ItemAddDTO;
 import com.example.backendapp.DTOs.ItemCardDTO;
+import com.example.backendapp.DTOs.ItemDetailsDTO;
 import com.example.backendapp.DTOs.ItemFilterDTO;
 import com.example.backendapp.entities.Item;
 import com.example.backendapp.repositories.ImageRepository;
@@ -54,9 +55,18 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item getItemById(UUID uuid) {
+    public ItemAddDTO getItemById(UUID uuid) { //ToDo new DTO ITEM DETAILS DTO WITH PATH
 
-        return itemRepository.findById(uuid).get();
+        Item item = itemRepository.findById(uuid).get();
+        ItemAddDTO itemAddDTO = this.modelMapper.map(item, ItemAddDTO.class);
+        return itemAddDTO;
+    }
+
+    public ItemDetailsDTO getItemDetails(UUID id) throws IOException {
+        Item item = itemRepository.findById(id).get();
+        ItemDetailsDTO itemDetailsDTO = this.modelMapper.map(item, ItemDetailsDTO.class);
+        itemDetailsDTO.setBytes(imageService.downloadImageFromFile(item.getImage().getFilePath()));
+        return itemDetailsDTO;
     }
 
     public void deleteAllItems() {
@@ -69,12 +79,17 @@ public class ItemService {
 
     public void updateItem(UUID id, ItemAddDTO itemUpdate) {
         Item item = (itemRepository.findById(id).get());
-
+//        Item item = new Item();
+//        item.setId(id);
         item.setName(itemUpdate.getName());
         item.setBrand(itemUpdate.getBrand());
         item.setSerialNumber(itemUpdate.getSerialNumber());
         item.setPrice(itemUpdate.getPrice());
+        item.setDateOfAdd(item.getDateOfAdd());
+        item.setQuantity(itemUpdate.getQuantity());
+        item.setPercentSale(itemUpdate.getPercentSale());
         item.setCategory(itemUpdate.getCategory());
+        item.setGeneralCategory(itemUpdate.getGeneralCategory());
         item.setDescriere(itemUpdate.getDescriere());
         itemRepository.save(item);
 

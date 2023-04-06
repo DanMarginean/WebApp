@@ -17,12 +17,11 @@ public class OrderItem {
     private Long Id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "item_id")
     private Item item;
     @ManyToOne
     @JoinColumn(name = "_user_id")
     private User user;
     private Integer quantity;
 
-    private Double price;
 }

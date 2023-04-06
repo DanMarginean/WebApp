@@ -55,7 +55,5 @@ public class Item {
     @JoinColumn(name = "image_id")
     private Image image;
 
-    private String filePath;
-
 
 }

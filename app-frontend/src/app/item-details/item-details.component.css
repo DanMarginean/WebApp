@@ -1,0 +1,11 @@
+.container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.Photos{
+  width: 50%;
+}
+.Details{
+  width: 50%;
+}

@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
           return throwError(err);
         })
         console.log(userData);
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/login');
         this.popup.showToast('Cont creat.Confirmati email', "info")
       });
   }

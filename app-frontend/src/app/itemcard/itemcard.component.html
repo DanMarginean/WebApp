@@ -43,7 +43,7 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-button (click)="addCart(itemCard.id)">Add to Cart</button>
-        <button mat-button>Favorites</button>
+        <button mat-button (click)="viewItem(itemCard.id)">View Item</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

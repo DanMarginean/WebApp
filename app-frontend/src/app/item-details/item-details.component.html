@@ -1,18 +1,36 @@
 <div style="background:antiquewhite;border: solid black;height: 80vh">
+<div class="container" >
+  <div class="Photos">
+  <div>
+    <img [src]="getImageUrl(itemDetails.bytes)" width="300px" height="300px">
+  </div>
+
+  </div>
+
+  <div class="Details">
+    <div style="border: solid black">Name: {{itemDetails.name}}</div>
+    <div style="border: solid black">Brand: {{itemDetails.brand}}</div>
+    <div style="border: solid black">S.N: {{itemDetails.serialNumber}}</div>
+    <div style="border: solid black">General Category: {{itemDetails.generalCategory}}</div>
+    <div style="border: solid black">Category :{{itemDetails.category}}</div>
+    <div style="border: solid black">Price: {{itemDetails.price}}</div>
+    <div style="border: solid black">Sale: {{itemDetails.percentSale}}</div>
+
+    <!-- -->
+    <button style="border: solid black">AddToCart</button>
+    <button style="border: solid black">AddToFavorites</button>
+  </div>
 
 
+</div>
 
-
-  <div style="border: solid black">Name</div>
-  <div style="border: solid black">Carousel photo</div>
-  <!-- -->
-  <button style="border: solid black">AddToCart</button>
-  <button style="border: solid black">AddToFavorites</button>
   <mat-divider ></mat-divider>
-  <div style="border: solid black">Descriere</div>
+  <div style="border: solid black">Descriere
+    <div style="border: solid black">Description: {{itemDetails.descriere}}</div>
+  </div>
   <mat-divider></mat-divider>
   <div style="border: solid black">Recenzii
-
+<textarea ></textarea>
 
   </div>
 

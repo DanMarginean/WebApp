@@ -127,9 +127,16 @@ console.log(id);
        this.toastMess.showToast(cart.item.name+" adaugat in cos","info")
        console.log(cart);}) // fac o clasa cu lista de cart
    }else {
+
      this.toastMess.showToast("Cantitate insuficienta pe stoc","error")}
    }
    )
 
 }
+
+  viewItem(id: string) {
+    console.log(id);
+    this.router.navigate(["/main/item-detail"], { queryParams: { detailId: id} })
+
+  }
 }

@@ -15,6 +15,8 @@ export class ItemCardService implements OnInit {
   deleteCardEndpoint = environment.apiEndpoints.deleteCard;
   updateCardEndpoint = environment.apiEndpoints.updateCard;
   searchEndpoint = environment.apiEndpoints.search;
+
+  oneItemEndpoint = environment.apiEndpoints.getItem;
   checkUpdate = false;
 
   constructor(private http: HttpClient,
@@ -22,7 +24,7 @@ export class ItemCardService implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllItemCards();
+    // this.getAllItemCards();
   }
 
   getAllItemCards(): Observable<ItemCard[]> {
@@ -42,5 +44,9 @@ export class ItemCardService implements OnInit {
   filterItems(params : FilterParams) {
     return this.http.post<ItemCard[]>(this.url+this.searchEndpoint,params)
 
+  }
+
+  getItemById(id):Observable<ItemAdd>{
+    return this.http.get<ItemAdd>(this.url+this.oneItemEndpoint +id);
   }
 }

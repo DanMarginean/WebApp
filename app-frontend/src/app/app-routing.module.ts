@@ -9,6 +9,7 @@ import {AuthGuardService} from "./authentication/auth-guard.service";
 import {MainComponent} from "./main/main.component";
 import {ItemDetailsComponent} from "./item-details/item-details.component";
 import {CartComponent} from "./cart/cart.component";
+import {OrderDetailsComponent} from "./order-details/order-details.component";
 
 
 const routes: Routes = [
@@ -27,11 +28,16 @@ const routes: Routes = [
       },
       {path: 'item-detail', component: ItemDetailsComponent},
       {path: 'cart', component: CartComponent,canActivate:[AuthGuardService]},
+      {path:'order', component: OrderDetailsComponent,canActivate:[AuthGuardService]}
     ]
   },
 
   {
     path: 'profile', component: ErrorComponent,
+    children:[
+      // {path: 'myOrders'},
+      // {path: 'editAccount'},
+    ],
     canActivate: [AuthGuardService]
   },
   {path: 'login', component: LoginComponent},

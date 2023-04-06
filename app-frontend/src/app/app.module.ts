@@ -40,6 +40,7 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
 import { CartComponent } from './cart/cart.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 
@@ -58,7 +59,8 @@ import {MatTableModule} from "@angular/material/table";
     MainComponent,
     UpdateDialogComponent,
     ItemDetailsComponent,
-    CartComponent
+    CartComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
