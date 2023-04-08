@@ -1,6 +1,8 @@
 package com.example.backendapp.services;
 
 import com.example.backendapp.DTOs.OrderDTO;
+import com.example.backendapp.DTOs.OrderItemDTO;
+import com.example.backendapp.DTOs.UserDTO;
 import com.example.backendapp.Security.User;
 import com.example.backendapp.config.JwtAuthenticationFilter;
 import com.example.backendapp.entities.Cart;
@@ -68,7 +70,7 @@ public class OrderDetailService {
         if (totalPrice > 150) {
             orderDetail.setShipping(0.0);
         } else {
-            orderDetail.setShipping(15.0);
+            orderDetail.setShipping(15.0); //need to remove if i put on frontend too
         }
         totalPrice += orderDetail.getShipping();
         orderDetail.setOrderItems(orderItems);
@@ -82,14 +84,27 @@ public class OrderDetailService {
     }
 
 
-    public List<OrderItem> checkout() { // TODO: 4/4/2023 move to order item service
+    public List<OrderItemDTO> checkout() { // TODO: 4/4/2023 move to order item service
         User user = this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get();
         List<Cart> carts = this.cartRepository.findByUser(user);
-        List<OrderItem> orderItems = new ArrayList<>();
+//        List<OrderItem> orderItems = new ArrayList<>();
+//        carts.forEach(cart -> {
+//            OrderItem orderItem = new OrderItem();
+//            orderItem.setItem(cart.getItem());
+//            orderItem.setUser(user); // adaug dto pentru user
+//            orderItem.setQuantity(cart.getQuantity());
+//            orderItems.add(orderItem);
+//        });
+//        return orderItems;
+        List<OrderItemDTO> orderItems = new ArrayList<>();
         carts.forEach(cart -> {
-            OrderItem orderItem = new OrderItem();
+            OrderItemDTO orderItem = new OrderItemDTO();
+            UserDTO userDTO = new UserDTO();
+            userDTO.setOrderEmail(user.getEmail());
+            userDTO.setOrderLastName(user.getLastname());
+            userDTO.setOrderFirstName(user.getFirstname());
             orderItem.setItem(cart.getItem());
-            orderItem.setUser(user); // adaug dto pentru user
+            orderItem.setUserDTO(userDTO);// adaug dto pentru user
             orderItem.setQuantity(cart.getQuantity());
             orderItems.add(orderItem);
         });

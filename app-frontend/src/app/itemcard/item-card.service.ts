@@ -17,6 +17,12 @@ export class ItemCardService implements OnInit {
   searchEndpoint = environment.apiEndpoints.search;
 
   oneItemEndpoint = environment.apiEndpoints.getItem;
+
+  getCategoryEnpoint = environment.apiEndpoints.getCategory;
+  getGeneralCategoryEnpoint = environment.apiEndpoints.getGeneralCategory;
+
+  getMenuCategoryEnpoint = environment.apiEndpoints.getMenuCategory;
+  getMenuGeneralCategoryEnpoint =environment.apiEndpoints.getMenuGeneralCategory;
   checkUpdate = false;
 
   constructor(private http: HttpClient,
@@ -48,5 +54,23 @@ export class ItemCardService implements OnInit {
 
   getItemById(id):Observable<ItemAdd>{
     return this.http.get<ItemAdd>(this.url+this.oneItemEndpoint +id);
+  }
+
+  getItemByCategory(category:string){
+    return this.http.get(this.url+this.getCategoryEnpoint+category)
+  }
+
+  getItemByGeneralCategory(category:string){
+    return this.http.get(this.url+this.getGeneralCategoryEnpoint+category)
+
+  }
+
+  getMenuCategory(category: string) {
+    return this.http.get(this.url+this.getMenuCategoryEnpoint+category);
+  }
+
+  getMenuGeneralCategory() {
+    return this.http.get(this.url+this.getMenuGeneralCategoryEnpoint);
+
   }
 }

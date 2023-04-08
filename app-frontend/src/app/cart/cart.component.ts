@@ -92,4 +92,30 @@ export class CartComponent implements OnInit, AfterViewInit {
 this.router.navigateByUrl("/main/order")
   }
 
+  increaseQuantity(name:string) {
+    this.cartDetails.filter(cart =>{
+      if(cart.item.name===name)
+        if(parseInt(cart.item.quantity)>=cart.quantity+1)
+        {
+          cart.quantity++;
+          console.log(cart.quantity)
+        }
+    })
+    // this.getCartDetails();
+    console.log(this.cartDetails);
+  }
+
+  decreaseQuantity(name:string) {
+    this.cartDetails.filter(cart =>{
+      if(cart.item.name===name)
+        if(cart.quantity-1>=0)
+        {
+          cart.quantity--;
+
+        }
+    })
+    // this.getCartDetails();
+    console.log(this.cartDetails);
+
+  }
 }

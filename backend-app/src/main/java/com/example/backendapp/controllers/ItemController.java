@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -47,10 +48,30 @@ public class ItemController {
         return this.itemService.getItemDetails(id);
     }
 
-    @PostMapping("/items")
-    public Item createItem(@RequestPart("item") ItemAddDTO item, @RequestPart("image") MultipartFile file) throws IOException {
+    @GetMapping("/category/{category}")
+    List<ItemCardDTO> itemsByCategory(@PathVariable(name = "category") String category) {
+        return this.itemService.getItemsByCategory(category);
+    }
 
-        return itemService.saveItem(item, file);
+    @GetMapping("/generalCategory/{generalCategory}")
+    List<ItemCardDTO> itemsByGeneralCategory(@PathVariable(name = "generalCategory") String generalCategory) {
+        return this.itemService.getItemsByGeneralCategory(generalCategory);
+    }
+
+    @GetMapping("/menuGeneralCategory")
+    Set<String> getMenuGeneralCategory(){
+        return this.itemService.getMenuGeneralCategory();
+    }
+
+    @GetMapping("/menuCategory/{generalCategory}")
+    Set<String> getMenuCategory(@PathVariable(name = "generalCategory") String generalCategory){
+        return this.itemService.getMenuCategory(generalCategory);
+    }
+
+    @PostMapping("/items")
+    public Item createItem(@RequestPart("item") ItemAddDTO item,@RequestPart("image") MultipartFile file) throws IOException { //@RequestPart("image") MultipartFile file
+
+        return itemService.saveItem(item,file);//change from Item si ItemAddDTO
     }
 
 
@@ -65,13 +86,18 @@ public class ItemController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateItemById(@PathVariable UUID id, @RequestBody ItemAddDTO item) {
-        this.itemService.updateItem(id, item);
+    public void updateItemById(@PathVariable UUID id, @RequestPart("item") ItemAddDTO item,@RequestPart("image") MultipartFile file) throws IOException{
+        this.itemService.updateItem(id, item,file);
     }
 
     @PostMapping("/search")
     public List<ItemCardDTO> getAllBySpecs(@RequestBody ItemFilterDTO itemFilterDTO) {
         return itemService.findItemsBySpecs(itemFilterDTO);
+    }
+
+    @GetMapping("/test")
+    public void TestREPO(@PathVariable UUID id, @PathVariable String category,@PathVariable String generalCategory){
+        this.itemService.testRepos(id,category,generalCategory);
     }
 }
 

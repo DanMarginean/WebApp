@@ -17,7 +17,11 @@ export const environment = {
     checkout: "checkout",
     getItem: "items/",
     placeOrder: "placeOrder",
-    getItemDetails:"itemDetails/"
+    getItemDetails:"itemDetails/",
+    getCategory: "category/",
+    getGeneralCategory:"generalCategory/",
+    getMenuCategory: "menuCategory/",
+    getMenuGeneralCategory: "menuGeneralCategory"
   },
   apiURLauth:"http://localhost:8081/api/v1/auth/",
   apiEndpointsauth:{

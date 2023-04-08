@@ -25,5 +25,8 @@ public class Image {
     private String filePath;
     private byte[] imageBytes;
 
+//    @OneToOne(mappedBy = "image")
+//    private Item item;
+
 
 }

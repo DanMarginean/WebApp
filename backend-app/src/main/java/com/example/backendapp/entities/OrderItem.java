@@ -17,7 +17,8 @@ public class OrderItem {
     private Long Id;
 
     @ManyToOne
-    @JoinColumn(name = "item_id")
+    ( cascade = CascadeType.ALL)
+//    @JoinColumn(name = "item_id")
     private Item item;
     @ManyToOne
     @JoinColumn(name = "_user_id")

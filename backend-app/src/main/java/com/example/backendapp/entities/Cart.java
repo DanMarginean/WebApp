@@ -19,8 +19,11 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "item_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+//    @ManyToOne( cascade = CascadeType.REMOVE,fetch=FetchType.EAGER)  //am sters inafara de many to one
+//    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    @JoinColumn(name = "item_id") //Sterge toate iteme care sunt in cart asa! Sa vad cum am facut sa sterg un cart de la buton si sa aplic tot aia si cand fac delete item daca il geseste
+    //in cartul userului sa il stearga
     private Item item;
 
     @OneToOne

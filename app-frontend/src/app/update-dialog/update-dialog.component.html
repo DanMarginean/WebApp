@@ -41,6 +41,11 @@
     </mat-form-field>
     <br/>
 
+    <div>
+      <input type="file"
+             (change)="onFileSelected($event)">
+    </div>
+
     <div></div>
   </mat-dialog-content>
 
@@ -49,3 +54,4 @@
 
   </mat-dialog-actions>
 </div>
+

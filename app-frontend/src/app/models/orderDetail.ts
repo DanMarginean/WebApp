@@ -1,9 +1,10 @@
 import {ItemAdd} from "./itemAdd";
 import {UserOrder} from "./userOrder";
+import {PlaceOrderDetail} from "./placeOrderDetail";
 
 export interface OrderDetail{
   item:ItemAdd;
-  user:UserOrder;
+  userDTO:PlaceOrderDetail;
   price:number;
   quantity:number;
 }

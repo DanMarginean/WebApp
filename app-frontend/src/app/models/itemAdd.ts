@@ -11,5 +11,5 @@ export interface ItemAdd{
   descriere:string;
   quantity:string;
   percentSale:string
-  image:ImageFile[];
+  image:ImageFile;
 }

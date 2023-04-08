@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {ToastMessegesService} from "../toast-messeges/toast-messeges.service";
 import {ImageFile} from "../models/image-file";
 import {DomSanitizer} from "@angular/platform-browser";
+import {parseJson} from "@angular/cli/src/utilities/json-file";
 
 @Component({
   selector: 'app-add-dialog',
@@ -40,9 +41,14 @@ export class AddDialogComponent implements OnInit {
     descriere: "",
     quantity: "",
     percentSale: "",
-    image: []
+    image: {file:null,
+            url:''}
   }
 
+  selectedFile: File;
+  imageUrl: string;
+
+  imageFile:ImageFile;
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
               private dialService: DialogService,
@@ -55,6 +61,7 @@ export class AddDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log(this.imageFile);
 
   }
 
@@ -69,38 +76,51 @@ export class AddDialogComponent implements OnInit {
     this.item.descriere = this.addItemForm.value.descriere;
     this.item.quantity = this.addItemForm.value.quantity;
     this.item.percentSale = this.addItemForm.value.percentageSale;
+    this.item.image=this.imageFile;
+    console.log(this.imageFile);
+    console.log(this.item);
     const itemFormData = this.createFormData(this.item)
+    console.log(itemFormData);
     this.dialService.addItem(itemFormData).subscribe(response => {
       this.dialogRef.close();
       this.toast.showToast("Item succesfully created", "info");
       console.log("item added")
       console.log(response);
-    });
+    },
+      (error)=>{console.log(error)});
+
   }
 
   createFormData(item: ItemAdd): FormData {
     const formData = new FormData();
     formData.append('item',
+      // JSON.stringify(this.item));
       new Blob([JSON.stringify(item)], {type: 'application/json'}));
-    for (var image = 0; image < item.image.length; image++) {
+    // for (var image = 0; image < item.image.length; image++) {
       formData.append('image',
-        item.image[image].file,
-        item.image[image].file.name)
-    }
+        item.image.file, //[image]
+        item.image.file.name)//[image]
+    // }
     return formData;
   }
 
   onFileSelected(event) {
     console.log(event);
     if (event.target.files) {
-      const files = event.target.files[0];
-      const imageFile: ImageFile = {
-        file: files,
-        url: this.sanitizer.bypassSecurityTrustUrl(
-          window.URL.createObjectURL(files)
-        )
-      }
-      this.item.image.push(imageFile)
+      this.selectedFile = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.imageUrl = reader.result as string;
+// console.log(this.imageUrl);
+        this.imageFile = {
+          file: this.selectedFile,
+          url: this.sanitizer.bypassSecurityTrustUrl(this.imageUrl)
+        }
+        // console.log(this.imageFile);
+      };
+
+      reader.readAsDataURL(this.selectedFile);
     }
   }
 }

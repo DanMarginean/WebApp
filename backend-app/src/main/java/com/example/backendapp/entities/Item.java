@@ -51,8 +51,8 @@ public class Item {
     private Integer percentSale;
 
 
-    @ManyToOne
-    @JoinColumn(name = "image_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id",referencedColumnName = "id")
     private Image image;
 
 

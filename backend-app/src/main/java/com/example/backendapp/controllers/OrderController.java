@@ -1,6 +1,7 @@
 package com.example.backendapp.controllers;
 
 import com.example.backendapp.DTOs.OrderDTO;
+import com.example.backendapp.DTOs.OrderItemDTO;
 import com.example.backendapp.entities.OrderDetail;
 import com.example.backendapp.entities.OrderItem;
 import com.example.backendapp.services.OrderDetailService;
@@ -27,7 +28,7 @@ public class OrderController {
     }
 
     @GetMapping("/checkout")
-    public List<OrderItem> checkout() {
+    public List<OrderItemDTO> checkout() {
 
         return this.orderDetailService.checkout();
     }

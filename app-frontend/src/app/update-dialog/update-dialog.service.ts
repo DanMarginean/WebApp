@@ -12,7 +12,7 @@ url=environment.apiURL;
 endpoint=environment.apiEndpoints.updateCard;
   constructor(private http:HttpClient) { }
 
-  updateItemS(itemId:string,item:ItemAdd):Observable<ItemAdd>{
+  updateItemS(itemId:string,item:FormData):Observable<any>{
     return this.http.put<ItemAdd>(this.url+this.endpoint+itemId,item);
   }
 }

@@ -1,3 +1,18 @@
 table {
   width: 100%;
 }
+.quantity_container{
+  display: flex;
+  justify-content: space-between;
+
+}
+.quantity_num{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.quantity_action{
+  width: 50%;
+}
