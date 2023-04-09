@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -52,8 +53,11 @@ public class Item {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id",referencedColumnName = "id")
+//    @JoinColumn(name = "image_id",referencedColumnName = "id")
     private Image image;
+
+    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
 
 }

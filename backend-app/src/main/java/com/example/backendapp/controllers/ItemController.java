@@ -95,10 +95,6 @@ public class ItemController {
         return itemService.findItemsBySpecs(itemFilterDTO);
     }
 
-    @GetMapping("/test")
-    public void TestREPO(@PathVariable UUID id, @PathVariable String category,@PathVariable String generalCategory){
-        this.itemService.testRepos(id,category,generalCategory);
-    }
 }
 
 

@@ -62,7 +62,6 @@ public class OrderDetailService {
             orderItem.setUser(user);
             orderItem.setQuantity(cart.getQuantity());
             orderItems.add(orderItem);
-            this.orderItemRepository.save(orderItem);
             Item item = this.itemRepository.findById(cart.getItem().getId()).get();
             item.setQuantity(item.getQuantity() - cart.getQuantity());
         });
@@ -77,6 +76,9 @@ public class OrderDetailService {
         orderDetail.setOrderAmount(totalPrice);
         orderDetail.setOrderDate(new Date());
         orderDetail.setUser(user);
+        for(OrderItem orderItem : orderDetail.getOrderItems()){
+            orderItem.getOrderDetail().add(orderDetail);
+        }
         this.orderRepository.save(orderDetail);
         this.cartRepository.deleteAllByUser(user);
 
@@ -87,15 +89,6 @@ public class OrderDetailService {
     public List<OrderItemDTO> checkout() { // TODO: 4/4/2023 move to order item service
         User user = this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get();
         List<Cart> carts = this.cartRepository.findByUser(user);
-//        List<OrderItem> orderItems = new ArrayList<>();
-//        carts.forEach(cart -> {
-//            OrderItem orderItem = new OrderItem();
-//            orderItem.setItem(cart.getItem());
-//            orderItem.setUser(user); // adaug dto pentru user
-//            orderItem.setQuantity(cart.getQuantity());
-//            orderItems.add(orderItem);
-//        });
-//        return orderItems;
         List<OrderItemDTO> orderItems = new ArrayList<>();
         carts.forEach(cart -> {
             OrderItemDTO orderItem = new OrderItemDTO();
@@ -204,6 +197,4 @@ public class OrderDetailService {
     }
 }
 
-
-// cverver
 

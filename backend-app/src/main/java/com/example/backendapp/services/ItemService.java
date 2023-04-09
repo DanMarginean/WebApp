@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -82,37 +84,23 @@ public class ItemService {
         itemRepository.deleteAll();
     }
 
+    @Transactional
     public void deleteItemById(UUID id) {
+        Item item = this.itemRepository.findById(id).get();
         List<OrderItem> orderItems = this.orderItemRepository.findAllByItem_Id(id);
         this.orderItemRepository.deleteAll(orderItems);
         List<Cart> carts = this.cartRepository.findAllByItem_Id(id);
-        this.cartRepository.deleteAll(carts);
-        List<OrderDetail> orderDetails = this.orderDetailRepository.findAll();
-        orderDetails.forEach(orderDetail -> {
-            List<OrderItem> orderItems1 = orderDetail.getOrderItems();
-            for(int i = 0; i<orderItems1.size();i++){
-                if(orderItems1.get(i).getItem().getId().equals(id)){
-                    orderItems1.remove(i);
-                }
-            };
-        });
+        carts.forEach(cart -> {cart.setItem(null);});
+        for (OrderItem orderItem:item.getOrderItems()){
+            orderItem.setItem(null);
+        }
+        item.setOrderItems(Collections.emptyList());
         itemRepository.deleteById(id);
     }
 
-    public void testRepos(UUID id ,String category,String generalCategory){
-        Item item = this.itemRepository.findById(id).get();
-        List<Item> items = this.itemRepository.findAllByCategory(category);
-        List<Item> items1 = this.itemRepository.findAllByGeneralCategory(generalCategory);
-        User user = this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get();
-        Cart cart = this.cartRepository.findByItemAndUser(item, user);
-        List<Cart> cart1 = this.cartRepository.findAllByItem_Id(id);
-        List<Cart> carts = this.cartRepository.findByUser(user);
-        List<OrderDetail> orderDetail = this.orderDetailRepository.findAllByUserId(user.getId());
-        List<OrderItem> orderItem = this.orderItemRepository.findAllByItem_Id(id);
-        System.out.println("salut");
 
-    }
 
+    @Transactional
     public void updateItem(UUID id, ItemAddDTO itemUpdate,MultipartFile file) throws IOException {
         Item item = (itemRepository.findById(id).get());
         item.setName(itemUpdate.getName());
@@ -126,8 +114,11 @@ public class ItemService {
         item.setGeneralCategory(itemUpdate.getGeneralCategory());
         item.setDescriere(itemUpdate.getDescriere());
         if(file!=null){
-            Image image = this.imageRepository.findFirstByFilePath(item.getImage().getFilePath());
-            this.imageRepository.delete(image);
+            Image image = item.getImage();
+//            File oldImage = new File(image.getFilePath());
+//            if(oldImage.exists()) {oldImage.delete();}   delete image from folder but if there are more with the same
+//            this.imageRepository.deleteById(image.getId());  name it delete them all
+//            this.imageRepository.delete(image);
             item.setImage(imageService.uploadImageToFile(file)); //ToDo Find the image of this item erase it and ad a new one
         }
         itemRepository.save(item);
@@ -142,6 +133,7 @@ public class ItemService {
             ItemCardDTO itemCardDTO = modelMapper.map(item, ItemCardDTO.class);
 
             try {
+                Image url = item.getImage();
                 itemCardDTO.setBytes(imageService.downloadImageFromFile(item.getImage().getFilePath()));
 
             } catch (Exception e) {

@@ -94,9 +94,9 @@ export class ItemcardComponent implements OnInit {
   deleteItem(id: string) {
     this.itemcardService.deleteItemById(id).subscribe(response => {
       console.log(response);
-
+      this.getAllItems();
     });
-    this.getAllItems();
+
     console.log("sters");
   }
 

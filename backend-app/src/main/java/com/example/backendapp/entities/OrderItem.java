@@ -4,6 +4,7 @@ import com.example.backendapp.Security.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter
@@ -17,12 +18,15 @@ public class OrderItem {
     private Long Id;
 
     @ManyToOne
-    ( cascade = CascadeType.ALL)
-//    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "item_id")
     private Item item;
     @ManyToOne
     @JoinColumn(name = "_user_id")
     private User user;
     private Integer quantity;
+
+    @ManyToMany
+    @JoinColumn(name = "orderItems")
+    private List<OrderDetail> orderDetail;
 
 }

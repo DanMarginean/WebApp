@@ -37,6 +37,5 @@ public class OrderDetail {
     @JoinTable(name = "order_detail_item",
             joinColumns = @JoinColumn(name = "order_detail_id"),
             inverseJoinColumns = @JoinColumn(name = "order_item_id"))
-    @JoinColumn(name = "order_item_id")
     private List<OrderItem> orderItems;
 }
