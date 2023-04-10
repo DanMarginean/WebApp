@@ -32,6 +32,10 @@ public class OrderController {
 
         return this.orderDetailService.checkout();
     }
+    @GetMapping("/delCart")
+    public void deleteCart(){
+        this.orderDetailService.deleteAllByUser();
+    }
 
     @GetMapping("/getAllOrders")
     public List<OrderDetail> getAllOrders() {

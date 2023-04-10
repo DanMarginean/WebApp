@@ -33,9 +33,19 @@ public class OrderDetail {
     @JoinColumn(name = "_user_id")
     private User user;
 //    @ManyToMany
-    @ManyToMany(cascade =CascadeType.REMOVE)  //am sters tot aici inafara de many to many
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) //am sters tot aici inafara de many to many
     @JoinTable(name = "order_detail_item",
             joinColumns = @JoinColumn(name = "order_detail_id"),
             inverseJoinColumns = @JoinColumn(name = "order_item_id"))
     private List<OrderItem> orderItems;
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.getOrderDetail().add(this);
+    }
+
+    public void removeOrderItem(OrderItem orderItem){
+        orderItems.remove(orderItem);
+        orderItem.getOrderDetail().remove(this);
+    }
 }

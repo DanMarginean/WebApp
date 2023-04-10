@@ -92,12 +92,15 @@ export class CartComponent implements OnInit, AfterViewInit {
 this.router.navigateByUrl("/main/order")
   }
 
+  //ToDo make update on backend too to increase and decrease quantity, other way it will not appear when you hit checkout button
   increaseQuantity(name:string) {
     this.cartDetails.filter(cart =>{
       if(cart.item.name===name)
         if(parseInt(cart.item.quantity)>=cart.quantity+1)
         {
           cart.quantity++;
+          // cart.total =  cart.quantity *(parseInt(cart.item.price) - ((parseInt(cart.item.percentSale) / 100) * parseInt(cart.item.price)));
+          // this.totalCart += cart.total;
           console.log(cart.quantity)
         }
     })
@@ -111,9 +114,12 @@ this.router.navigateByUrl("/main/order")
         if(cart.quantity-1>=0)
         {
           cart.quantity--;
+          // cart.total =  cart.quantity *(parseInt(cart.item.price) - ((parseInt(cart.item.percentSale) / 100) * parseInt(cart.item.price)));
+          // this.totalCart -= cart.total;
 
         }
     })
+
     // this.getCartDetails();
     console.log(this.cartDetails);
 

@@ -54,6 +54,7 @@ public class OrderDetailService {
         OrderDetail orderDetail = this.modelMapper.map(orderDTO, OrderDetail.class);
         User user = this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get();
         double totalPrice = 0;
+
         List<OrderItem> orderItems = new ArrayList<>();
         List<Cart> cartItems = this.cartRepository.findByUser(user);
         cartItems.forEach(cart -> {
@@ -62,8 +63,10 @@ public class OrderDetailService {
             orderItem.setUser(user);
             orderItem.setQuantity(cart.getQuantity());
             orderItems.add(orderItem);
+            this.orderItemRepository.save(orderItem);
             Item item = this.itemRepository.findById(cart.getItem().getId()).get();
             item.setQuantity(item.getQuantity() - cart.getQuantity());
+
         });
         totalPrice = cartItems.stream().mapToDouble(cart -> cart.getQuantity() * (cart.getItem().getPrice() - ((Double.valueOf(cart.getItem().getPercentSale()) / 100) * cart.getItem().getPrice()))).sum();
         if (totalPrice > 150) {
@@ -76,15 +79,19 @@ public class OrderDetailService {
         orderDetail.setOrderAmount(totalPrice);
         orderDetail.setOrderDate(new Date());
         orderDetail.setUser(user);
-        for(OrderItem orderItem : orderDetail.getOrderItems()){
-            orderItem.getOrderDetail().add(orderDetail);
-        }
-        this.orderRepository.save(orderDetail);
+//        for(OrderItem orderItem1 : orderDetail.getOrderItems()){
+//            orderItem1.getOrderDetail().add(orderDetail);
+//        }
+       OrderDetail orderDetail1= this.orderRepository.save(orderDetail);
         this.cartRepository.deleteAllByUser(user);
 
-        return orderDetail;
+        return orderDetail1;
     }
 
+    public void deleteAllByUser(){
+        List<Cart> carts = this.cartRepository.findByUser(this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get());
+        this.cartRepository.deleteAllByUser(this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get());
+    }
 
     public List<OrderItemDTO> checkout() { // TODO: 4/4/2023 move to order item service
         User user = this.userRepository.findByEmail(JwtAuthenticationFilter.userEmail).get();

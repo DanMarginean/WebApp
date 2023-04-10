@@ -17,7 +17,7 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id")
     private Item item;
     @ManyToOne
@@ -25,8 +25,16 @@ public class OrderItem {
     private User user;
     private Integer quantity;
 
-    @ManyToMany
-    @JoinColumn(name = "orderItems")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private List<OrderDetail> orderDetail;
 
+    @PreRemove
+    private void preRemove(){
+        for (OrderDetail orderDetail1 : orderDetail){
+//            orderDetail1.removeOrderItem(this);
+            orderDetail1.setOrderItems(null);
+        }
+
+    }
 }

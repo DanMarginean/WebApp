@@ -87,21 +87,41 @@ public class ItemService {
     @Transactional
     public void deleteItemById(UUID id) {
         Item item = this.itemRepository.findById(id).get();
-        List<OrderItem> orderItems = this.orderItemRepository.findAllByItem_Id(id);
-        this.orderItemRepository.deleteAll(orderItems);
-        List<Cart> carts = this.cartRepository.findAllByItem_Id(id);
-        carts.forEach(cart -> {cart.setItem(null);});
-        for (OrderItem orderItem:item.getOrderItems()){
-            orderItem.setItem(null);
-        }
-        item.setOrderItems(Collections.emptyList());
+//        List<OrderItem> orderItems = this.orderItemRepository.findAllByItem_Id(id);
+//        this.orderItemRepository.deleteAll(orderItems);
+//        List<OrderItem>orderItems = this.orderItemRepository.findByItem(item);
+//        orderItems.forEach(orderItem -> {
+//            Long orid = orderItem.getId();
+////            for (OrderDetail orderDetail : orderItem.getOrderDetail()) {
+////                orderDetail.getOrderItems().remove(orderItem);
+////                this.orderDetailRepository.save(orderDetail);
+////            }
+//            orderItem.setItem(null);
+////            this.orderItemRepository.deleteById(orderItem.getId());
+//            this.orderItemRepository.delete(orderItem);
+//        });
+//        this.orderItemRepository.deleteAll(orderItems);
+//      orderItems.forEach(orderItem -> {
+//          this.orderItemRepository.deleteById(orderItem.getId());
+//      });
+        //ToDo If item is in an order then mark it somehow as removed and just dont send it to fromt anymore, like add a new field in item entity false and if the method is called make it true, after that verify when you return list of items if it's removed or not
+        List<Cart> carts = this.cartRepository.findByItem(item);
+//        this.cartRepository.deleteAll(carts);
+        carts.forEach(cart -> {
+            cart.setItem(null);
+            this.cartRepository.deleteById(cart.getId());
+        });
+//        for (OrderItem orderItem:item.getOrderItems()){
+//            orderItem.setItem(null);
+//        }
+//        item.setOrderItems(Collections.emptyList());
+//        UUID uuid = item.getId();
         itemRepository.deleteById(id);
     }
 
 
-
     @Transactional
-    public void updateItem(UUID id, ItemAddDTO itemUpdate,MultipartFile file) throws IOException {
+    public void updateItem(UUID id, ItemAddDTO itemUpdate, MultipartFile file) throws IOException {
         Item item = (itemRepository.findById(id).get());
         item.setName(itemUpdate.getName());
         item.setBrand(itemUpdate.getBrand());
@@ -113,7 +133,7 @@ public class ItemService {
         item.setCategory(itemUpdate.getCategory());
         item.setGeneralCategory(itemUpdate.getGeneralCategory());
         item.setDescriere(itemUpdate.getDescriere());
-        if(file!=null){
+        if (file != null) {
             Image image = item.getImage();
 //            File oldImage = new File(image.getFilePath());
 //            if(oldImage.exists()) {oldImage.delete();}   delete image from folder but if there are more with the same
@@ -156,7 +176,7 @@ public class ItemService {
     }
 
     public List<ItemCardDTO> getItemsByCategory(String category) {
-        List<Item> items =this.itemRepository.findAllByCategory(category);
+        List<Item> items = this.itemRepository.findAllByCategory(category);
         items.stream().filter(item -> item.getCategory().equals(category));
         List<ItemCardDTO> itemCardDTOS = new ArrayList<>();
         for (Item item : items) {
@@ -164,13 +184,11 @@ public class ItemService {
             try {
 
                 itemCardDTO.setBytes(imageService.downloadImageFromFile(item.getImage().getFilePath()));
-            }
-            catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 itemCardDTOS.add(itemCardDTO);
                 continue;
 
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
 //               throw new RuntimeException(e);
                 itemCardDTO.setImage(null);
                 itemCardDTOS.add(itemCardDTO);
@@ -184,21 +202,19 @@ public class ItemService {
 
     }
 
-    public List<ItemCardDTO> getItemsByGeneralCategory(String generalCategory){
-        List<Item> items =this.itemRepository.findAllByGeneralCategory(generalCategory);
+    public List<ItemCardDTO> getItemsByGeneralCategory(String generalCategory) {
+        List<Item> items = this.itemRepository.findAllByGeneralCategory(generalCategory);
         items.stream().filter(item -> item.getCategory().equals(generalCategory));
         List<ItemCardDTO> itemCardDTOS = new ArrayList<>();
         for (Item item : items) {
             ItemCardDTO itemCardDTO = this.modelMapper.map(item, ItemCardDTO.class);
             try {
                 itemCardDTO.setBytes(imageService.downloadImageFromFile(item.getImage().getFilePath()));
-            }
-            catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 itemCardDTOS.add(itemCardDTO);
                 continue;
 
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
 //                throw new RuntimeException(e);
                 itemCardDTO.setImage(null);
                 itemCardDTOS.add(itemCardDTO);
@@ -209,19 +225,20 @@ public class ItemService {
         return itemCardDTOS;
     }
 
-    public Set<String> getMenuGeneralCategory(){
-        List<Item>items = this.itemRepository.findAll();
+    public Set<String> getMenuGeneralCategory() {
+        List<Item> items = this.itemRepository.findAll();
         Set<String> generalCategories = new HashSet<>();
         items.forEach(item -> {
             generalCategories.add(item.getGeneralCategory());
         });
         return generalCategories;
     }
-    public Set<String> getMenuCategory(String generalCategory){
-        List<Item>items = this.itemRepository.findAll();
+
+    public Set<String> getMenuCategory(String generalCategory) {
+        List<Item> items = this.itemRepository.findAll();
         Set<String> categories = new HashSet<>();
         items.forEach(item -> {
-            if(item.getGeneralCategory().equals(generalCategory)){
+            if (item.getGeneralCategory().equals(generalCategory)) {
                 categories.add(item.getCategory());
             }
         });
